@@ -50,10 +50,38 @@ public final class EndpointRuleSet implements FromSourceLocation, ToNode, ToSmit
     private static final String PARAMETERS = "parameters";
     private static final String RULES = "rules";
 
-    private static boolean loaded = false;
     private static final Map<String, Parameter> BUILT_INS = new HashMap<>();
     private static final Map<String, FunctionDefinition> FUNCTIONS = new HashMap<>();
     private static final List<AuthSchemeValidator> AUTH_SCHEME_VALIDATORS = new ArrayList<>();
+
+    static {
+        // Provide an explicit classloader, as the thread's classloader may be different in cases
+        // where a model is loaded in extraneous contexts, like a build tool.
+        // TODO Change how the classloader is configured.
+        for (EndpointRuleSetExtension extension : ServiceLoader.load(EndpointRuleSetExtension.class,
+                EndpointRuleSet.class.getClassLoader())
+        ) {
+            System.out.println(extension.getClass().getCanonicalName());
+            String name;
+            for (Parameter builtIn : extension.getBuiltIns()) {
+                name = builtIn.getBuiltIn().get();
+                if (BUILT_INS.containsKey(name)) {
+                    throw new RuntimeException("Attempted to load a duplicate built-in parameter: " + name);
+                }
+                BUILT_INS.put(name, builtIn);
+            }
+
+            for (FunctionDefinition functionDefinition : extension.getLibraryFunctions()) {
+                name = functionDefinition.getId();
+                if (FUNCTIONS.containsKey(name)) {
+                    throw new RuntimeException("Attempted to load a duplicate library function: " + name);
+                }
+                FUNCTIONS.put(name, functionDefinition);
+            }
+
+            AUTH_SCHEME_VALIDATORS.addAll(extension.getAuthSchemeValidators());
+        }
+    }
 
     private final Parameters parameters;
     private final List<Rule> rules;
@@ -84,7 +112,6 @@ public final class EndpointRuleSet implements FromSourceLocation, ToNode, ToSmit
      * @return the created EndpointRuleSet.
      */
     public static EndpointRuleSet fromNode(Node node) throws RuleError {
-        loadExtensions();
         return RuleError.context("when parsing endpoint ruleset", () -> {
             ObjectNode objectNode = node.expectObjectNode("The root of a ruleset must be an object");
 
@@ -194,35 +221,6 @@ public final class EndpointRuleSet implements FromSourceLocation, ToNode, ToSmit
         rules.forEach(rule -> builder.append(StringUtils.indent(rule.toString(), 2)));
         return builder.toString();
     }
-
-    private static void loadExtensions() {
-        if (loaded) {
-            return;
-        }
-        loaded = true;
-
-        for (EndpointRuleSetExtension extension : ServiceLoader.load(EndpointRuleSetExtension.class)) {
-            String name;
-            for (Parameter builtIn : extension.getBuiltIns()) {
-                name = builtIn.getBuiltIn().get();
-                if (BUILT_INS.containsKey(name)) {
-                    throw new RuntimeException("Attempted to load a duplicate built-in parameter: " + name);
-                }
-                BUILT_INS.put(name, builtIn);
-            }
-
-            for (FunctionDefinition functionDefinition : extension.getLibraryFunctions()) {
-                name = functionDefinition.getId();
-                if (FUNCTIONS.containsKey(name)) {
-                    throw new RuntimeException("Attempted to load a duplicate library function: " + name);
-                }
-                FUNCTIONS.put(name, functionDefinition);
-            }
-
-            AUTH_SCHEME_VALIDATORS.addAll(extension.getAuthSchemeValidators());
-        }
-    }
-
 
     /**
      * Returns true if a built-in of the provided name has been registered.
