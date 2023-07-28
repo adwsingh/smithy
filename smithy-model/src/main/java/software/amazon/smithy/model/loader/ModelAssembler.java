@@ -580,15 +580,18 @@ public final class ModelAssembler {
         }
 
         if (disableValidation) {
-            List<ValidationEventDecorator> decorators = validatorFactory.loadDecorators();
-            return new ValidatedResult<>(transformed, ModelValidator.decorateEvents(decorators, events));
-        }
-
-        try {
-            return validate(transformed, events);
-        } catch (SourceException e) {
-            events.add(ValidationEvent.fromSourceException(e));
+            ValidationEventDecorator decorator = ValidationEventDecorator.compose(validatorFactory.loadDecorators());
+            for (int idx = 0; idx < events.size(); idx++) {
+                events.set(idx, decorator.decorate(events.get(idx)));
+            }
             return new ValidatedResult<>(transformed, events);
+        } else {
+            try {
+                return validate(transformed, events);
+            } catch (SourceException e) {
+                events.add(ValidationEvent.fromSourceException(e));
+                return new ValidatedResult<>(transformed, events);
+            }
         }
     }
 
@@ -599,22 +602,22 @@ public final class ModelAssembler {
     }
 
     private ValidatedResult<Model> returnOnlyErrors(Model model, List<ValidationEvent> events) {
-        List<ValidationEventDecorator> decorators = validatorFactory.loadDecorators();
+        ValidationEventDecorator decorator = ValidationEventDecorator.compose(validatorFactory.loadDecorators());
         return new ValidatedResult<>(model, events.stream()
                                                   .filter(event -> event.getSeverity() == Severity.ERROR)
-                                                  .map(event -> ModelValidator.decorateEvent(decorators, event))
+                                                  .map(decorator::decorate)
                                                   .collect(Collectors.toList()));
     }
 
     private ValidatedResult<Model> validate(Model model, List<ValidationEvent> events) {
         // Validate the model based on the explicit validators and model metadata.
         // Note the ModelValidator handles emitting events to the validationEventListener.
-        List<ValidationEvent> mergedEvents = new ModelValidator()
+        List<ValidationEvent> mergedEvents = ModelValidator.builder()
                 .validators(validators)
                 .validatorFactory(validatorFactory)
                 .eventListener(validationEventListener)
                 .includeEvents(events)
-                .createValidator()
+                .build()
                 .validate(model);
 
         return new ValidatedResult<>(model, mergedEvents);
