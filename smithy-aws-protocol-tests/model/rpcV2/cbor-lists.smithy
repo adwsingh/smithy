@@ -113,6 +113,24 @@ apply RpcV2CborLists @httpRequestTests([
         }
     },
     {
+        id: "RpcV2CborListsEmpty",
+        documentation: "Serializes empty JSON dense lists",
+        protocol: rpcv2Cbor,
+        method: "POST",
+        uri: "/service/RpcV2Protocol/operation/RpcV2CborLists",
+        // https://cbor.nemo157.com/#type=hex&value=bf6a737472696e674c69737480ff
+		body: "v2pzdHJpbmdMaXN0gP8="
+        bodyMediaType: "application/cbor",
+        headers: {
+            "smithy-protocol": "rpc-v2-cbor",
+            "Accept": "application/cbor",
+            "Content-Type": "application/cbor"
+        },
+        params: {
+            stringList: []
+        }
+    },
+    {
         id: "RpcV2CborListsSerializeNull",
         documentation: "Serializes null values in lists",
         protocol: rpcv2Cbor,
@@ -135,9 +153,8 @@ apply RpcV2CborLists @httpRequestTests([
         protocol: rpcv2Cbor,
         method: "POST",
         uri: "/service/RpcV2Protocol/operation/RpcV2CborLists",
-        // bf70737061727365537472696e674c6973749f7f781d416e206578616d706c6520696e646566696e69746520737472696e672c772077686963682077696c6c206265206368756e6b65642c6e206f6e206561636820636f6d6d61ff7f7835416e6f74686572206578616d706c6520696e646566696e69746520737472696e672077697468206f6e6c79206f6e65206368756e6bff7654686973206973206120706c61696e20737472696e67ffff
-        body: "v3BzcGFyc2VTdHJpbmdMaXN0n394HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcsdyB3aGljaCB3aWxsIGJlIGNodW5rZWQsbiBvbiBlYWNoIGNvbW1h/394NUFub3RoZXIgZXhhbXBsZSBpbmRlZmluaXRlIHN0cmluZyB3aXRoIG9ubHkgb25lIGNodW5r/3ZUaGlzIGlzIGEgcGxhaW4gc3RyaW5n//8=",
-        bodyMediaType: "application/cbor",
+        // https://cbor.nemo157.com/#type=hex&value=bf70737061727365537472696e674c6973749f7f781d416e206578616d706c6520696e646566696e69746520737472696e672c772077686963682077696c6c206265206368756e6b65642c6e206f6e206561636820636f6d6d61ff7f7835416e6f74686572206578616d706c6520696e646566696e69746520737472696e672077697468206f6e6c79206f6e65206368756e6bff7654686973206973206120706c61696e20737472696e67ffff
+		body: "v3BzcGFyc2VTdHJpbmdMaXN0n394HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcsdyB3aGljaCB3aWxsIGJlIGNodW5rZWQsbiBvbiBlYWNoIGNvbW1h/394NUFub3RoZXIgZXhhbXBsZSBpbmRlZmluaXRlIHN0cmluZyB3aXRoIG9ubHkgb25lIGNodW5r/3ZUaGlzIGlzIGEgcGxhaW4gc3RyaW5n//8="        bodyMediaType: "application/cbor",
         headers: {
             "smithy-protocol": "rpc-v2-cbor",
             "Accept": "application/cbor",
@@ -153,9 +170,8 @@ apply RpcV2CborLists @httpRequestTests([
         protocol: rpcv2Cbor,
         method: "POST",
         uri: "/service/RpcV2Protocol/operation/RpcV2CborLists",
-        // a16a737472696e674c697374837f781d416e206578616d706c6520696e646566696e69746520737472696e672c772077686963682077696c6c206265206368756e6b65642c6e206f6e206561636820636f6d6d61ff7f7835416e6f74686572206578616d706c6520696e646566696e69746520737472696e672077697468206f6e6c79206f6e65206368756e6bff7654686973206973206120706c61696e20737472696e67
-        body: "oWpzdHJpbmdMaXN0g394HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcsdyB3aGljaCB3aWxsIGJlIGNodW5rZWQsbiBvbiBlYWNoIGNvbW1h/394NUFub3RoZXIgZXhhbXBsZSBpbmRlZmluaXRlIHN0cmluZyB3aXRoIG9ubHkgb25lIGNodW5r/3ZUaGlzIGlzIGEgcGxhaW4gc3RyaW5n",
-        bodyMediaType: "application/cbor",
+        // https://cbor.nemo157.com/#type=hex&value=a16a737472696e674c697374837f781d416e206578616d706c6520696e646566696e69746520737472696e672c772077686963682077696c6c206265206368756e6b65642c6e206f6e206561636820636f6d6d61ff7f7835416e6f74686572206578616d706c6520696e646566696e69746520737472696e672077697468206f6e6c79206f6e65206368756e6bff7654686973206973206120706c61696e20737472696e67
+		body: "oWpzdHJpbmdMaXN0g394HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcsdyB3aGljaCB3aWxsIGJlIGNodW5rZWQsbiBvbiBlYWNoIGNvbW1h/394NUFub3RoZXIgZXhhbXBsZSBpbmRlZmluaXRlIHN0cmluZyB3aXRoIG9ubHkgb25lIGNodW5r/3ZUaGlzIGlzIGEgcGxhaW4gc3RyaW5n"        bodyMediaType: "application/cbor",
         headers: {
             "smithy-protocol": "rpc-v2-cbor",
             "Accept": "application/cbor",

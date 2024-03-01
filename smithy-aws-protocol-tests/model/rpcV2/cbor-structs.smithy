@@ -22,15 +22,15 @@ use smithy.test#httpResponseTests
         uri: "/service/aws.protocoltests.rpcv2Cbor.RpcV2Protocol/operation/SimpleScalarProperties",
         body: "v2lieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9f8="
         params: {
-            trueBooleanValue: true,
-            falseBooleanValue: false,
             byteValue: 5,
             doubleValue: 1.889,
+            falseBooleanValue: false,
             floatValue: 7.624,
             integerValue: 256,
-            shortValue: 9898,
             longValue: 9873,
-            stringValue: "simple"
+            shortValue: 9898,
+            stringValue: "simple",
+            trueBooleanValue: true
         }
     },
     {
@@ -133,12 +133,52 @@ use smithy.test#httpResponseTests
         method: "POST",
         bodyMediaType: "application/cbor",
         uri: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
-        // bf6b737472696e6756616c75657f781d416e206578616d706c6520696e646566696e69746520737472696e672c71206368756e6b6564206f6e20636f6d6d61ffff
-        body: "v2tzdHJpbmdWYWx1ZX94HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcscSBjaHVua2VkIG9uIGNvbW1h//8="
+        // https://cbor.nemo157.com/#type=hex&value=bf6b737472696e6756616c75657f781d416e206578616d706c6520696e646566696e69746520737472696e672c71206368756e6b6564206f6e20636f6d6d61ffff
+		body: "v2tzdHJpbmdWYWx1ZX94HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcscSBjaHVua2VkIG9uIGNvbW1h//8="
         params: {
             stringValue: "An example indefinite string, chunked on comma"
         }
-    }
+    },
+    {
+        id: "RpcV2CborSupportsIndefiniteLengthByteStrings",
+        protocol: rpcv2Cbor,
+        documentation: "Supports indefinite length byte strings.",
+        headers: {
+            "smithy-protocol": "rpc-v2-cbor",
+            "Accept": "application/cbor",
+            "Content-Type": "application/cbor"
+        }
+        method: "POST",
+        bodyMediaType: "application/cbor",
+        uri: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
+        // https://cbor.nemo157.com/#type=hex&value=bf6b737472696e6756616c75655f5822416e206578616d706c6520696e646566696e6974652d6279746520737472696e672c51206368756e6b6564206f6e20636f6d6d61ffff
+		body: "v2tzdHJpbmdWYWx1ZV9YIkFuIGV4YW1wbGUgaW5kZWZpbml0ZS1ieXRlIHN0cmluZyxRIGNodW5rZWQgb24gY29tbWH//w=="
+        params: {
+            stringValue: "An example indefinite-byte string, chunked on comma"
+        }
+    },
+    {
+        id: "RpcV2CborSupportsUpcastingData",
+        protocol: rpcv2Cbor,
+        documentation: "Supports upcasting from a smaller byte representation of the same date type.",
+        headers: {
+            "smithy-protocol": "rpc-v2-cbor",
+            "Accept": "application/cbor",
+            "Content-Type": "application/cbor"
+        }
+        method: "POST",
+        bodyMediaType: "application/cbor",
+        uri: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
+        // https://cbor.nemo157.com/#type=hex&value=bf6b646f75626c6556616c7565f93f8e6a666c6f617456616c7565f947a06c696e746567657256616c75651838696c6f6e6756616c75651901006a73686f727456616c75650aff
+		body: "v2tkb3VibGVWYWx1Zfk/jmpmbG9hdFZhbHVl+UegbGludGVnZXJWYWx1ZRg4aWxvbmdWYWx1ZRkBAGpzaG9ydFZhbHVlCv8="
+        params: {
+            doubleValue: 1.889,
+            floatValue: 7.624,
+            integerValue: 56,
+            longValue: 256,
+            shortValue: 10
+        }
+    },
 ])
 @httpResponseTests([
     {
