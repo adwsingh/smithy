@@ -128,7 +128,43 @@ apply RpcV2CborLists @httpRequestTests([
         params: {
             sparseStringList: [null, "hi"]
         }
-    }
+    },
+    {
+        id: "RpcV2CborSparseListWithIndefiniteString",
+        documentation: "Serializes indefinite length strings inside sparse list",
+        protocol: rpcv2Cbor,
+        method: "POST",
+        uri: "/service/RpcV2Protocol/operation/RpcV2CborLists",
+        // bf70737061727365537472696e674c6973749f5f581d416e206578616d706c6520696e646566696e69746520737472696e672c572077686963682077696c6c206265206368756e6b65642c4e206f6e206561636820636f6d6d61ff5f5835416e6f74686572206578616d706c6520696e646566696e69746520737472696e672077697468206f6e6c79206f6e65206368756e6bff7654686973206973206120706c61696e20737472696e67ffff
+        body: "v3BzcGFyc2VTdHJpbmdMaXN0n19YHUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcsVyB3aGljaCB3aWxsIGJlIGNodW5rZWQsTiBvbiBlYWNoIGNvbW1h/19YNUFub3RoZXIgZXhhbXBsZSBpbmRlZmluaXRlIHN0cmluZyB3aXRoIG9ubHkgb25lIGNodW5r/3ZUaGlzIGlzIGEgcGxhaW4gc3RyaW5n//8=",
+        bodyMediaType: "application/cbor",
+        headers: {
+            "smithy-protocol": "rpc-v2-cbor",
+            "Accept": "application/cbor",
+            "Content-Type": "application/cbor"
+        },
+        params: {
+            sparseStringList: ["An example indefinite string, which will be chunked, on each comma", "Another example indefinite string with only one chunk", "This is a plain string"]
+        }
+    },
+        {
+        id: "RpcV2CborListWithIndefiniteString",
+        documentation: "Serializes indefinite length strings inside dense list",
+        protocol: rpcv2Cbor,
+        method: "POST",
+        uri: "/service/RpcV2Protocol/operation/RpcV2CborLists",
+        // a16a737472696e674c697374835f581d416e206578616d706c6520696e646566696e69746520737472696e672c572077686963682077696c6c206265206368756e6b65642c4e206f6e206561636820636f6d6d61ff5f5835416e6f74686572206578616d706c6520696e646566696e69746520737472696e672077697468206f6e6c79206f6e65206368756e6bff7654686973206973206120706c61696e20737472696e67
+        body: "oWpzdHJpbmdMaXN0g19YHUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcsVyB3aGljaCB3aWxsIGJlIGNodW5rZWQsTiBvbiBlYWNoIGNvbW1h/19YNUFub3RoZXIgZXhhbXBsZSBpbmRlZmluaXRlIHN0cmluZyB3aXRoIG9ubHkgb25lIGNodW5r/3ZUaGlzIGlzIGEgcGxhaW4gc3RyaW5n",
+        bodyMediaType: "application/cbor",
+        headers: {
+            "smithy-protocol": "rpc-v2-cbor",
+            "Accept": "application/cbor",
+            "Content-Type": "application/cbor"
+        },
+        params: {
+            stringList: ["An example indefinite string, which will be chunked, on each comma", "Another example indefinite string with only one chunk", "This is a plain string"]
+        }
+    },
 ])
 
 apply RpcV2CborLists @httpResponseTests([
