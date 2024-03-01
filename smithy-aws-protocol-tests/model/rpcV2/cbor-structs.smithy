@@ -124,7 +124,7 @@ use smithy.test#httpResponseTests
     {
         id: "RpcV2CborSupportsIndefiniteLengthStrings",
         protocol: rpcv2Cbor,
-        documentation: "Supports indefinite length strings.",
+        documentation: "Supports indefinite length text strings.",
         headers: {
             "smithy-protocol": "rpc-v2-cbor",
             "Accept": "application/cbor",
@@ -133,8 +133,8 @@ use smithy.test#httpResponseTests
         method: "POST",
         bodyMediaType: "application/cbor",
         uri: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
-        // bf6b737472696e6756616c75655f581d416e206578616d706c6520696e646566696e69746520737472696e672c51206368756e6b6564206f6e20636f6d6d61ffff
-        body: "v2tzdHJpbmdWYWx1ZV9YHUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcsUSBjaHVua2VkIG9uIGNvbW1h//8="
+        // bf6b737472696e6756616c75657f781d416e206578616d706c6520696e646566696e69746520737472696e672c71206368756e6b6564206f6e20636f6d6d61ffff
+        body: "v2tzdHJpbmdWYWx1ZX94HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcscSBjaHVua2VkIG9uIGNvbW1h//8="
         params: {
             stringValue: "An example indefinite string, chunked on comma"
         }
