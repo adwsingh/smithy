@@ -34,6 +34,32 @@ use smithy.test#httpResponseTests
         }
     },
     {
+        id: "RpcV2CborSimpleScalarPropertiesUsingIndefiniteLength",
+        protocol: rpcv2Cbor,
+        documentation: "Serializes simple scalar properties using definite length map",
+        headers: {
+            "smithy-protocol": "rpc-v2-cbor",
+            "Accept": "application/cbor",
+            "Content-Type": "application/cbor"
+        }
+        method: "POST",
+        bodyMediaType: "application/cbor",
+        uri: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
+        // https://cbor.nemo157.com/#type=hex&value=a9696279746556616c7565056b646f75626c6556616c7565fb3ffe395810624dd37166616c7365426f6f6c65616e56616c7565f46a666c6f617456616c7565fa40f3f7cf6c696e746567657256616c7565190100696c6f6e6756616c75651926916a73686f727456616c75651926aa6b737472696e6756616c75656673696d706c657074727565426f6f6c65616e56616c7565f5
+        body: "qWlieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9Q=="
+        params: {
+            byteValue: 5,
+            doubleValue: 1.889,
+            falseBooleanValue: false,
+            floatValue: 7.624,
+            integerValue: 256,
+            longValue: 9873,
+            shortValue: 9898,
+            stringValue: "simple",
+            trueBooleanValue: true
+        }
+    },
+    {
         id: "RpcV2CborClientDoesntSerializeNullStructureValues",
         documentation: "RpcV2 Cbor should not serialize null structure values",
         protocol: rpcv2Cbor,
@@ -134,7 +160,7 @@ use smithy.test#httpResponseTests
         bodyMediaType: "application/cbor",
         uri: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
         // https://cbor.nemo157.com/#type=hex&value=bf6b737472696e6756616c75657f781d416e206578616d706c6520696e646566696e69746520737472696e672c71206368756e6b6564206f6e20636f6d6d61ffff
-		body: "v2tzdHJpbmdWYWx1ZX94HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcscSBjaHVua2VkIG9uIGNvbW1h//8="
+        body: "v2tzdHJpbmdWYWx1ZX94HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcscSBjaHVua2VkIG9uIGNvbW1h//8="
         params: {
             stringValue: "An example indefinite string, chunked on comma"
         }
@@ -152,7 +178,7 @@ use smithy.test#httpResponseTests
         bodyMediaType: "application/cbor",
         uri: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
         // https://cbor.nemo157.com/#type=hex&value=bf6b737472696e6756616c75655f5822416e206578616d706c6520696e646566696e6974652d6279746520737472696e672c51206368756e6b6564206f6e20636f6d6d61ffff
-		body: "v2tzdHJpbmdWYWx1ZV9YIkFuIGV4YW1wbGUgaW5kZWZpbml0ZS1ieXRlIHN0cmluZyxRIGNodW5rZWQgb24gY29tbWH//w=="
+        body: "v2tzdHJpbmdWYWx1ZV9YIkFuIGV4YW1wbGUgaW5kZWZpbml0ZS1ieXRlIHN0cmluZyxRIGNodW5rZWQgb24gY29tbWH//w=="
         params: {
             stringValue: "An example indefinite-byte string, chunked on comma"
         }
@@ -170,7 +196,7 @@ use smithy.test#httpResponseTests
         bodyMediaType: "application/cbor",
         uri: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
         // https://cbor.nemo157.com/#type=hex&value=bf6b646f75626c6556616c7565f93f8e6a666c6f617456616c7565f947a06c696e746567657256616c75651838696c6f6e6756616c75651901006a73686f727456616c75650aff
-		body: "v2tkb3VibGVWYWx1Zfk/jmpmbG9hdFZhbHVl+UegbGludGVnZXJWYWx1ZRg4aWxvbmdWYWx1ZRkBAGpzaG9ydFZhbHVlCv8="
+        body: "v2tkb3VibGVWYWx1Zfk/jmpmbG9hdFZhbHVl+UegbGludGVnZXJWYWx1ZRg4aWxvbmdWYWx1ZRkBAGpzaG9ydFZhbHVlCv8="
         params: {
             doubleValue: 1.889,
             floatValue: 7.624,

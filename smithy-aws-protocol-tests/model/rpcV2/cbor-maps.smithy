@@ -24,7 +24,7 @@ apply RpcV2CborMaps @httpRequestTests([
         method: "POST",
         uri: "/service/RpcV2Protocol/operation/RpcV2CborMaps",
         // https://cbor.nemo157.com/#type=hex&value=bf6e64656e73655374727563744d6170a263666f6fa16268696574686572656362617aa1626869636279656f7370617273655374727563744d6170bf63666f6fa16268696574686572656362617aa162686963627965ffff
-		body: "v25kZW5zZVN0cnVjdE1hcKJjZm9voWJoaWV0aGVyZWNiYXqhYmhpY2J5ZW9zcGFyc2VTdHJ1Y3RNYXC/Y2Zvb6FiaGlldGhlcmVjYmF6oWJoaWNieWX//w=="
+        body: "v25kZW5zZVN0cnVjdE1hcKJjZm9voWJoaWV0aGVyZWNiYXqhYmhpY2J5ZW9zcGFyc2VTdHJ1Y3RNYXC/Y2Zvb6FiaGlldGhlcmVjYmF6oWJoaWNieWX//w=="
         bodyMediaType: "application/cbor",
         headers: {
             "smithy-protocol": "rpc-v2-cbor",
@@ -85,7 +85,7 @@ apply RpcV2CborMaps @httpRequestTests([
         method: "POST",
         uri: "/service/RpcV2Protocol/operation/RpcV2CborMaps",
         // https://cbor.nemo157.com/#type=hex&value=bf6e64656e73654e756d6265724d6170a16178006f7370617273654e756d6265724d6170bf617800ff6f64656e7365426f6f6c65616e4d6170a16178f470737061727365426f6f6c65616e4d6170bf6178f4ffff
-		body: "v25kZW5zZU51bWJlck1hcKFheABvc3BhcnNlTnVtYmVyTWFwv2F4AP9vZGVuc2VCb29sZWFuTWFwoWF49HBzcGFyc2VCb29sZWFuTWFwv2F49P//"
+        body: "v25kZW5zZU51bWJlck1hcKFheABvc3BhcnNlTnVtYmVyTWFwv2F4AP9vZGVuc2VCb29sZWFuTWFwoWF49HBzcGFyc2VCb29sZWFuTWFwv2F49P//"
         bodyMediaType: "application/cbor",
         headers: {
             "smithy-protocol": "rpc-v2-cbor",
@@ -177,7 +177,7 @@ apply RpcV2CborMaps @httpResponseTests([
         protocol: rpcv2Cbor,
         code: 200,
         // https://cbor.nemo157.com/#type=hex&value=bf6e64656e73655374727563744d6170a263666f6fa16268696574686572656362617aa1626869636279656f7370617273655374727563744d6170bf63666f6fa16268696574686572656362617aa162686963627965ffff
-		body: "v25kZW5zZVN0cnVjdE1hcKJjZm9voWJoaWV0aGVyZWNiYXqhYmhpY2J5ZW9zcGFyc2VTdHJ1Y3RNYXC/Y2Zvb6FiaGlldGhlcmVjYmF6oWJoaWNieWX//w=="
+        body: "v25kZW5zZVN0cnVjdE1hcKJjZm9voWJoaWV0aGVyZWNiYXqhYmhpY2J5ZW9zcGFyc2VTdHJ1Y3RNYXC/Y2Zvb6FiaGlldGhlcmVjYmF6oWJoaWNieWX//w=="
         bodyMediaType: "application/cbor",
         headers: {
             "smithy-protocol": "rpc-v2-cbor",
@@ -208,7 +208,7 @@ apply RpcV2CborMaps @httpResponseTests([
         protocol: rpcv2Cbor,
         code: 200,
         // https://cbor.nemo157.com/#type=hex&value=bf70737061727365426f6f6c65616e4d6170bf6178f6ff6f7370617273654e756d6265724d6170bf6178f6ff6f737061727365537472696e674d6170bf6178f6ff6f7370617273655374727563744d6170bf6178f6ffff
-		body: "v3BzcGFyc2VCb29sZWFuTWFwv2F49v9vc3BhcnNlTnVtYmVyTWFwv2F49v9vc3BhcnNlU3RyaW5nTWFwv2F49v9vc3BhcnNlU3RydWN0TWFwv2F49v//"
+        body: "v3BzcGFyc2VCb29sZWFuTWFwv2F49v9vc3BhcnNlTnVtYmVyTWFwv2F49v9vc3BhcnNlU3RyaW5nTWFwv2F49v9vc3BhcnNlU3RydWN0TWFwv2F49v//"
         bodyMediaType: "application/cbor",
         headers: {
             "smithy-protocol": "rpc-v2-cbor",
@@ -235,7 +235,7 @@ apply RpcV2CborMaps @httpResponseTests([
         protocol: rpcv2Cbor,
         code: 200,
         // https://cbor.nemo157.com/#type=hex&value=bf6e64656e73654e756d6265724d6170a16178006f7370617273654e756d6265724d6170bf617800ff6f64656e7365426f6f6c65616e4d6170a16178f470737061727365426f6f6c65616e4d6170bf6178f4ffff
-		body: "v25kZW5zZU51bWJlck1hcKFheABvc3BhcnNlTnVtYmVyTWFwv2F4AP9vZGVuc2VCb29sZWFuTWFwoWF49HBzcGFyc2VCb29sZWFuTWFwv2F49P//"
+        body: "v25kZW5zZU51bWJlck1hcKFheABvc3BhcnNlTnVtYmVyTWFwv2F4AP9vZGVuc2VCb29sZWFuTWFwoWF49HBzcGFyc2VCb29sZWFuTWFwv2F49P//"
         bodyMediaType: "application/cbor",
         headers: {
             "smithy-protocol": "rpc-v2-cbor",
@@ -320,7 +320,7 @@ apply RpcV2CborMaps @httpResponseTests([
         appliesTo: "client",
         code: 200,
         // https://cbor.nemo157.com/#type=hex&value=a16b64656e73655365744d6170a261788061798261616162
-		body: "oWtkZW5zZVNldE1hcKJheIBheYJhYWFi"
+        body: "oWtkZW5zZVNldE1hcKJheIBheYJhYWFi"
         bodyMediaType: "application/cbor",
         headers: {
             "smithy-protocol": "rpc-v2-cbor",
