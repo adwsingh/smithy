@@ -404,3 +404,166 @@ structure SimpleScalarStructure {
     shortValue: Short,
     stringValue: String,
 }
+
+
+apply DefaultFieldInputOutput @httpRequestTests([
+    {
+        id: "RpcV2CborEmptyInputShouldSerializeDefaultValues",
+        documentation: "Serializes an empty input with default values filled in.",
+        protocol: rpcv2Cbor,
+        method: "POST",
+        uri: "/service/RpcV2Protocol/operation/DefaultFieldInputOutput",
+        // https://cbor.nemo157.com/#type=hex&value=a9696279746556616c7565056b646f75626c6556616c7565fb3ffe395810624dd37166616c7365426f6f6c65616e56616c7565f46a666c6f617456616c7565fa40f3f7cf6c696e746567657256616c7565190100696c6f6e6756616c75651926916a73686f727456616c75651926aa6b737472696e6756616c75656673696d706c657074727565426f6f6c65616e56616c7565f5
+        body: "qWlieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9Q=="
+        bodyMediaType: "application/cbor",
+        headers: {
+            "smithy-protocol": "rpc-v2-cbor",
+            "Accept": "application/cbor",
+            "Content-Type": "application/cbor"
+        },
+        params: {
+        }
+    },
+    {
+        id: "RpcV2CborEmptyInputServerShouldFillDefault",
+        documentation: "Server should fill in the default values when it deserializes an empty input.",
+        protocol: rpcv2Cbor,
+        method: "POST",
+        uri: "/service/RpcV2Protocol/operation/DefaultFieldInputOutput",
+        // https://cbor.nemo157.com/#type=hex&value=a0
+        body: "oA=="
+        bodyMediaType: "application/cbor",
+        headers: {
+            "smithy-protocol": "rpc-v2-cbor",
+            "Accept": "application/cbor",
+            "Content-Type": "application/cbor"
+        },
+        params: {
+            byteValue: 5,
+            doubleValue: 1.889,
+            falseBooleanValue: false,
+            floatValue: 7.624,
+            integerValue: 256,
+            longValue: 9873,
+            shortValue: 9898,
+            stringValue: "simple",
+            trueBooleanValue: true
+        },
+        appliesTo: "server"
+    },
+    {
+        id: "RpcV2CborSomeDefaultValuesLeftOut",
+        documentation: "Left over default values should be filled in.",
+        protocol: rpcv2Cbor,
+        method: "POST",
+        uri: "/service/RpcV2Protocol/operation/DefaultFieldInputOutput",
+        // https://cbor.nemo157.com/#type=hex&value=a9696279746556616c7565006b646f75626c6556616c7565fb40071cac083126e97166616c7365426f6f6c65616e56616c7565f56a666c6f617456616c7565fa404f5c296c696e746567657256616c75651838696c6f6e6756616c75651926916a73686f727456616c75651926aa6b737472696e6756616c75656673696d706c657074727565426f6f6c65616e56616c7565f4
+        body: "qWlieXRlVmFsdWUAa2RvdWJsZVZhbHVl+0AHHKwIMSbpcWZhbHNlQm9vbGVhblZhbHVl9WpmbG9hdFZhbHVl+kBPXClsaW50ZWdlclZhbHVlGDhpbG9uZ1ZhbHVlGSaRanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxlcHRydWVCb29sZWFuVmFsdWX0"
+        bodyMediaType: "application/cbor",
+        headers: {
+            "smithy-protocol": "rpc-v2-cbor",
+            "Accept": "application/cbor",
+            "Content-Type": "application/cbor"
+        },
+        params: {
+            byteValue: 0,
+            doubleValue: 2.889,
+            falseBooleanValue: true,
+            floatValue: 3.24,
+            integerValue: 56,
+            trueBooleanValue: false
+        },
+    },
+    {
+        id: "RpcV2CborServerShouldFillLeftoutDefaultValues",
+        documentation: "The server should fill in the leftover default values.",
+        protocol: rpcv2Cbor,
+        method: "POST",
+        uri: "/service/RpcV2Protocol/operation/DefaultFieldInputOutput",
+        // https://cbor.nemo157.com/#type=hex&value=a6696279746556616c7565006b646f75626c6556616c7565fb40071cac083126e97166616c7365426f6f6c65616e56616c7565f56a666c6f617456616c7565fa404f5c296c696e746567657256616c756518387074727565426f6f6c65616e56616c7565f4
+        body: "pmlieXRlVmFsdWUAa2RvdWJsZVZhbHVl+0AHHKwIMSbpcWZhbHNlQm9vbGVhblZhbHVl9WpmbG9hdFZhbHVl+kBPXClsaW50ZWdlclZhbHVlGDhwdHJ1ZUJvb2xlYW5WYWx1ZfQ="
+        bodyMediaType: "application/cbor",
+        headers: {
+            "smithy-protocol": "rpc-v2-cbor",
+            "Accept": "application/cbor",
+            "Content-Type": "application/cbor"
+        },
+        params: {
+            byteValue: 0,
+            doubleValue: 2.889,
+            falseBooleanValue: true,
+            floatValue: 3.24,
+            integerValue: 56,
+            longValue: 9873,
+            shortValue: 9898,
+            stringValue: "simple",
+            trueBooleanValue: false
+        },
+        appliesTo: "server"
+    }
+])
+
+apply DefaultFieldInputOutput @httpResponseTests([
+    {
+        id: "RpcV2CborEmptyOutputShouldSerializeDefaultValues",
+        documentation: "Serializes an empty input with default values filled in.",
+        protocol: rpcv2Cbor,
+        code: 200,
+        // https://cbor.nemo157.com/#type=hex&value=a9696279746556616c7565056b646f75626c6556616c7565fb3ffe395810624dd37166616c7365426f6f6c65616e56616c7565f46a666c6f617456616c7565fa40f3f7cf6c696e746567657256616c7565190100696c6f6e6756616c75651926916a73686f727456616c75651926aa6b737472696e6756616c75656673696d706c657074727565426f6f6c65616e56616c7565f5
+        body: "qWlieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9Q=="
+        bodyMediaType: "application/cbor",
+        headers: {
+            "smithy-protocol": "rpc-v2-cbor",
+            "Content-Type": "application/cbor"
+        },
+        params: {
+        }
+    },
+    {
+        id: "RpcV2CborSomeDefaultValuesLeftOut",
+        documentation: "Left over default values should be filled in.",
+        protocol: rpcv2Cbor,
+        code: 200,
+        // https://cbor.nemo157.com/#type=hex&value=a9696279746556616c7565006b646f75626c6556616c7565fb40071cac083126e97166616c7365426f6f6c65616e56616c7565f56a666c6f617456616c7565fa404f5c296c696e746567657256616c75651838696c6f6e6756616c75651926916a73686f727456616c75651926aa6b737472696e6756616c75656673696d706c657074727565426f6f6c65616e56616c7565f4
+        body: "qWlieXRlVmFsdWUAa2RvdWJsZVZhbHVl+0AHHKwIMSbpcWZhbHNlQm9vbGVhblZhbHVl9WpmbG9hdFZhbHVl+kBPXClsaW50ZWdlclZhbHVlGDhpbG9uZ1ZhbHVlGSaRanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxlcHRydWVCb29sZWFuVmFsdWX0"
+        bodyMediaType: "application/cbor",
+        headers: {
+            "smithy-protocol": "rpc-v2-cbor",
+            "Content-Type": "application/cbor"
+        },
+        params: {
+            byteValue: 0,
+            doubleValue: 2.889,
+            falseBooleanValue: true,
+            floatValue: 3.24,
+            integerValue: 56,
+            trueBooleanValue: false
+        },
+    }
+])
+
+operation DefaultFieldInputOutput {
+    input: DefaultFieldStructure,
+    output: DefaultFieldStructure
+}
+
+structure DefaultFieldStructure {
+    @default(true)
+    trueBooleanValue: Boolean,
+    @default(false)
+    falseBooleanValue: Boolean,
+    @default(1)
+    byteValue: Byte,
+    @default(1.889)
+    doubleValue: Double,
+    @default(7.624)
+    floatValue: Float,
+    @default(256)
+    integerValue: Integer,
+    @default(9873)
+    longValue: Long,
+    @default(9898)
+    shortValue: Short,
+    @default("simple"),
+    stringValue: String,
+}
