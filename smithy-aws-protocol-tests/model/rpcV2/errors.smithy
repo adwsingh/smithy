@@ -43,6 +43,7 @@ apply InvalidGreeting @httpResponseTests([
             "smithy-protocol": "rpc-v2-cbor",
             "Content-Type": "application/cbor"
         },
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=v2ZfX3R5cGV4K2F3cy5wcm90b2NvbHRlc3RzLnJwY3YyQ2JvciNJbnZhbGlkR3JlZXRpbmdnTWVzc2FnZWJIaf8%3D
         body: "v2ZfX3R5cGV4K2F3cy5wcm90b2NvbHRlc3RzLnJwY3YyQ2JvciNJbnZhbGlkR3JlZXRpbmdnTWVzc2FnZWJIaf8=",
         bodyMediaType: "application/cbor",
     },
@@ -75,6 +76,7 @@ apply ComplexError @httpResponseTests([
             "smithy-protocol": "rpc-v2-cbor",
             "Content-Type": "application/cbor"
         },
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=v2ZfX3R5cGV4KGF3cy5wcm90b2NvbHRlc3RzLnJwY3YyQ2JvciNDb21wbGV4RXJyb3JoVG9wTGV2ZWxpVG9wIGxldmVsZk5lc3RlZL9jRm9vY2Jhcv%2F%2F
         body: "v2ZfX3R5cGV4KGF3cy5wcm90b2NvbHRlc3RzLnJwY3YyQ2JvciNDb21wbGV4RXJyb3JoVG9wTGV2ZWxpVG9wIGxldmVsZk5lc3RlZL9jRm9vY2Jhcv//",
         bodyMediaType: "application/cbor"
     },
@@ -89,5 +91,3 @@ apply ComplexError @httpResponseTests([
         bodyMediaType: "application/cbor"
     },
 ])
-
-

@@ -101,6 +101,7 @@ apply RpcV2CborLists @httpRequestTests([
         protocol: rpcv2Cbor,
         method: "POST",
         uri: "/service/RpcV2Protocol/operation/RpcV2CborLists",
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=v2pzdHJpbmdMaXN0n%2F%2F%2F
         body: "v2pzdHJpbmdMaXN0n///",
         bodyMediaType: "application/cbor",
         headers: {
@@ -118,8 +119,8 @@ apply RpcV2CborLists @httpRequestTests([
         protocol: rpcv2Cbor,
         method: "POST",
         uri: "/service/RpcV2Protocol/operation/RpcV2CborLists",
-        // https://cbor.nemo157.com/#type=hex&value=bf6a737472696e674c69737480ff
-        body: "v2pzdHJpbmdMaXN0gP8="
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=oWpzdHJpbmdMaXN0gA%3D%3D
+        body: "oWpzdHJpbmdMaXN0gA=="
         bodyMediaType: "application/cbor",
         headers: {
             "smithy-protocol": "rpc-v2-cbor",
@@ -149,12 +150,13 @@ apply RpcV2CborLists @httpRequestTests([
     },
     {
         id: "RpcV2CborSparseListWithIndefiniteString",
-        documentation: "Serializes indefinite length text strings inside sparse list",
+        documentation: "Serializes indefinite length text strings inside an indefinite length list",
         protocol: rpcv2Cbor,
         method: "POST",
         uri: "/service/RpcV2Protocol/operation/RpcV2CborLists",
-        // https://cbor.nemo157.com/#type=hex&value=bf70737061727365537472696e674c6973749f7f781d416e206578616d706c6520696e646566696e69746520737472696e672c772077686963682077696c6c206265206368756e6b65642c6e206f6e206561636820636f6d6d61ff7f7835416e6f74686572206578616d706c6520696e646566696e69746520737472696e672077697468206f6e6c79206f6e65206368756e6bff7654686973206973206120706c61696e20737472696e67ffff
-        body: "v3BzcGFyc2VTdHJpbmdMaXN0n394HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcsdyB3aGljaCB3aWxsIGJlIGNodW5rZWQsbiBvbiBlYWNoIGNvbW1h/394NUFub3RoZXIgZXhhbXBsZSBpbmRlZmluaXRlIHN0cmluZyB3aXRoIG9ubHkgb25lIGNodW5r/3ZUaGlzIGlzIGEgcGxhaW4gc3RyaW5n//8="        bodyMediaType: "application/cbor",
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=v3BzcGFyc2VTdHJpbmdMaXN0n394HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcsdyB3aGljaCB3aWxsIGJlIGNodW5rZWQsbiBvbiBlYWNoIGNvbW1h%2F394NUFub3RoZXIgZXhhbXBsZSBpbmRlZmluaXRlIHN0cmluZyB3aXRoIG9ubHkgb25lIGNodW5r%2F3ZUaGlzIGlzIGEgcGxhaW4gc3RyaW5n%2F%2F8%3D
+        body: "v3BzcGFyc2VTdHJpbmdMaXN0n394HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcsdyB3aGljaCB3aWxsIGJlIGNodW5rZWQsbiBvbiBlYWNoIGNvbW1h/394NUFub3RoZXIgZXhhbXBsZSBpbmRlZmluaXRlIHN0cmluZyB3aXRoIG9ubHkgb25lIGNodW5r/3ZUaGlzIGlzIGEgcGxhaW4gc3RyaW5n//8="
+        bodyMediaType: "application/cbor",
         headers: {
             "smithy-protocol": "rpc-v2-cbor",
             "Accept": "application/cbor",
@@ -164,14 +166,15 @@ apply RpcV2CborLists @httpRequestTests([
             sparseStringList: ["An example indefinite string, which will be chunked, on each comma", "Another example indefinite string with only one chunk", "This is a plain string"]
         }
     },
-        {
+    {
         id: "RpcV2CborListWithIndefiniteString",
-        documentation: "Serializes indefinite length text strings inside dense list",
+        documentation: "Serializes indefinite length text strings inside a definite length list",
         protocol: rpcv2Cbor,
         method: "POST",
         uri: "/service/RpcV2Protocol/operation/RpcV2CborLists",
-        // https://cbor.nemo157.com/#type=hex&value=a16a737472696e674c697374837f781d416e206578616d706c6520696e646566696e69746520737472696e672c772077686963682077696c6c206265206368756e6b65642c6e206f6e206561636820636f6d6d61ff7f7835416e6f74686572206578616d706c6520696e646566696e69746520737472696e672077697468206f6e6c79206f6e65206368756e6bff7654686973206973206120706c61696e20737472696e67
-        body: "oWpzdHJpbmdMaXN0g394HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcsdyB3aGljaCB3aWxsIGJlIGNodW5rZWQsbiBvbiBlYWNoIGNvbW1h/394NUFub3RoZXIgZXhhbXBsZSBpbmRlZmluaXRlIHN0cmluZyB3aXRoIG9ubHkgb25lIGNodW5r/3ZUaGlzIGlzIGEgcGxhaW4gc3RyaW5n"        bodyMediaType: "application/cbor",
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=oWpzdHJpbmdMaXN0g394HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcsdyB3aGljaCB3aWxsIGJlIGNodW5rZWQsbiBvbiBlYWNoIGNvbW1h%2F394NUFub3RoZXIgZXhhbXBsZSBpbmRlZmluaXRlIHN0cmluZyB3aXRoIG9ubHkgb25lIGNodW5r%2F3ZUaGlzIGlzIGEgcGxhaW4gc3RyaW5n
+        body: "oWpzdHJpbmdMaXN0g394HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcsdyB3aGljaCB3aWxsIGJlIGNodW5rZWQsbiBvbiBlYWNoIGNvbW1h/394NUFub3RoZXIgZXhhbXBsZSBpbmRlZmluaXRlIHN0cmluZyB3aXRoIG9ubHkgb25lIGNodW5r/3ZUaGlzIGlzIGEgcGxhaW4gc3RyaW5n"
+        bodyMediaType: "application/cbor",
         headers: {
             "smithy-protocol": "rpc-v2-cbor",
             "Accept": "application/cbor",
@@ -180,7 +183,7 @@ apply RpcV2CborLists @httpRequestTests([
         params: {
             stringList: ["An example indefinite string, which will be chunked, on each comma", "Another example indefinite string with only one chunk", "This is a plain string"]
         }
-    },
+    }
 ])
 
 apply RpcV2CborLists @httpResponseTests([
@@ -244,6 +247,21 @@ apply RpcV2CborLists @httpResponseTests([
                     "b": "4"
                 }
             ]
+        }
+    },
+        {
+        id: "RpcV2CborListsEmpty",
+        documentation: "Serializes empty RpcV2 Cbor lists",
+        protocol: rpcv2Cbor,
+        code: 200,
+        body: "v2pzdHJpbmdMaXN0n///",
+        bodyMediaType: "application/cbor",
+        headers: {
+            "smithy-protocol": "rpc-v2-cbor",
+            "Content-Type": "application/cbor"
+        },
+        params: {
+            stringList: []
         }
     },
     {

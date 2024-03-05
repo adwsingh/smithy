@@ -45,7 +45,7 @@ use smithy.test#httpResponseTests
         method: "POST",
         bodyMediaType: "application/cbor",
         uri: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
-        // https://cbor.nemo157.com/#type=hex&value=a9696279746556616c7565056b646f75626c6556616c7565fb3ffe395810624dd37166616c7365426f6f6c65616e56616c7565f46a666c6f617456616c7565fa40f3f7cf6c696e746567657256616c7565190100696c6f6e6756616c75651926916a73686f727456616c75651926aa6b737472696e6756616c75656673696d706c657074727565426f6f6c65616e56616c7565f5
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=qWlieXRlVmFsdWUFa2RvdWJsZVZhbHVl%2Bz%2F%2BOVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl%2BkDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9Q%3D%3D
         body: "qWlieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9Q=="
         params: {
             byteValue: 5,
@@ -159,8 +159,8 @@ use smithy.test#httpResponseTests
         method: "POST",
         bodyMediaType: "application/cbor",
         uri: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
-        // https://cbor.nemo157.com/#type=hex&value=bf6b737472696e6756616c75657f781d416e206578616d706c6520696e646566696e69746520737472696e672c71206368756e6b6564206f6e20636f6d6d61ffff
-        body: "v2tzdHJpbmdWYWx1ZX94HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcscSBjaHVua2VkIG9uIGNvbW1h//8="
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=oWtzdHJpbmdWYWx1ZX94HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcscSBjaHVua2VkIG9uIGNvbW1h%2Fw%3D%3D
+        body: "oWtzdHJpbmdWYWx1ZX94HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcscSBjaHVua2VkIG9uIGNvbW1h/w=="
         params: {
             stringValue: "An example indefinite string, chunked on comma"
         }
@@ -177,8 +177,8 @@ use smithy.test#httpResponseTests
         method: "POST",
         bodyMediaType: "application/cbor",
         uri: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
-        // https://cbor.nemo157.com/#type=hex&value=bf6b737472696e6756616c75655f5822416e206578616d706c6520696e646566696e6974652d6279746520737472696e672c51206368756e6b6564206f6e20636f6d6d61ffff
-        body: "v2tzdHJpbmdWYWx1ZV9YIkFuIGV4YW1wbGUgaW5kZWZpbml0ZS1ieXRlIHN0cmluZyxRIGNodW5rZWQgb24gY29tbWH//w=="
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=oWtzdHJpbmdWYWx1ZV9YIkFuIGV4YW1wbGUgaW5kZWZpbml0ZS1ieXRlIHN0cmluZyxRIGNodW5rZWQgb24gY29tbWH%2F
+        body: "oWtzdHJpbmdWYWx1ZV9YIkFuIGV4YW1wbGUgaW5kZWZpbml0ZS1ieXRlIHN0cmluZyxRIGNodW5rZWQgb24gY29tbWH/"
         params: {
             stringValue: "An example indefinite-byte string, chunked on comma"
         }
@@ -195,7 +195,7 @@ use smithy.test#httpResponseTests
         method: "POST",
         bodyMediaType: "application/cbor",
         uri: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
-        // https://cbor.nemo157.com/#type=hex&value=bf6b646f75626c6556616c7565f93f8e6a666c6f617456616c7565f947a06c696e746567657256616c75651838696c6f6e6756616c75651901006a73686f727456616c75650aff
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=v2tkb3VibGVWYWx1Zfk%2FjmpmbG9hdFZhbHVl%2BUegbGludGVnZXJWYWx1ZRg4aWxvbmdWYWx1ZRkBAGpzaG9ydFZhbHVlCv8%3D
         body: "v2tkb3VibGVWYWx1Zfk/jmpmbG9hdFZhbHVl+UegbGludGVnZXJWYWx1ZRg4aWxvbmdWYWx1ZRkBAGpzaG9ydFZhbHVlCv8="
         params: {
             doubleValue: 1.889,
@@ -216,7 +216,8 @@ use smithy.test#httpResponseTests
             "Content-Type": "application/cbor"
         }
         bodyMediaType: "application/cbor",
-        body: "v3B0cnVlQm9vbGVhblZhbHVl9XFmYWxzZUJvb2xlYW5WYWx1ZfRpYnl0ZVZhbHVlBWtkb3VibGVWYWx1Zfs//jlYEGJN02pmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxl/w==",
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=v3B0cnVlQm9vbGVhblZhbHVl9XFmYWxzZUJvb2xlYW5WYWx1ZfRpYnl0ZVZhbHVlBWtkb3VibGVWYWx1Zfs%2F%2FjlYEGJN02pmbG9hdFZhbHVl%2BkDz989saW50ZWdlclZhbHVlGQEAanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxl%2Fw%3D%3D
+        body: "v3B0cnVlQm9vbGVhblZhbHVl9XFmYWxzZUJvb2xlYW5WYWx1ZfRpYnl0ZVZhbHVlBWtkb3VibGVWYWx1Zfs//jlYEGJN02pmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxl/w=="
         code: 200,
         params: {
             trueBooleanValue: true,
@@ -413,8 +414,7 @@ apply DefaultFieldInputOutput @httpRequestTests([
         protocol: rpcv2Cbor,
         method: "POST",
         uri: "/service/RpcV2Protocol/operation/DefaultFieldInputOutput",
-        // https://cbor.nemo157.com/#type=hex&value=a9696279746556616c7565056b646f75626c6556616c7565fb3ffe395810624dd37166616c7365426f6f6c65616e56616c7565f46a666c6f617456616c7565fa40f3f7cf6c696e746567657256616c7565190100696c6f6e6756616c75651926916a73686f727456616c75651926aa6b737472696e6756616c75656673696d706c657074727565426f6f6c65616e56616c7565f5
-        body: "qWlieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9Q=="
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=qWlieXRlVmFsdWUFa2RvdWJsZVZhbHVl%2Bz%2F%2BOVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl%2BkDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9Q%3D%3D        body: "qWlieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9Q=="
         bodyMediaType: "application/cbor",
         headers: {
             "smithy-protocol": "rpc-v2-cbor",
@@ -430,7 +430,7 @@ apply DefaultFieldInputOutput @httpRequestTests([
         protocol: rpcv2Cbor,
         method: "POST",
         uri: "/service/RpcV2Protocol/operation/DefaultFieldInputOutput",
-        // https://cbor.nemo157.com/#type=hex&value=a0
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=oA%3D%3D
         body: "oA=="
         bodyMediaType: "application/cbor",
         headers: {
@@ -457,7 +457,7 @@ apply DefaultFieldInputOutput @httpRequestTests([
         protocol: rpcv2Cbor,
         method: "POST",
         uri: "/service/RpcV2Protocol/operation/DefaultFieldInputOutput",
-        // https://cbor.nemo157.com/#type=hex&value=a9696279746556616c7565006b646f75626c6556616c7565fb40071cac083126e97166616c7365426f6f6c65616e56616c7565f56a666c6f617456616c7565fa404f5c296c696e746567657256616c75651838696c6f6e6756616c75651926916a73686f727456616c75651926aa6b737472696e6756616c75656673696d706c657074727565426f6f6c65616e56616c7565f4
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=qWlieXRlVmFsdWUAa2RvdWJsZVZhbHVl%2B0AHHKwIMSbpcWZhbHNlQm9vbGVhblZhbHVl9WpmbG9hdFZhbHVl%2BkBPXClsaW50ZWdlclZhbHVlGDhpbG9uZ1ZhbHVlGSaRanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxlcHRydWVCb29sZWFuVmFsdWX0
         body: "qWlieXRlVmFsdWUAa2RvdWJsZVZhbHVl+0AHHKwIMSbpcWZhbHNlQm9vbGVhblZhbHVl9WpmbG9hdFZhbHVl+kBPXClsaW50ZWdlclZhbHVlGDhpbG9uZ1ZhbHVlGSaRanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxlcHRydWVCb29sZWFuVmFsdWX0"
         bodyMediaType: "application/cbor",
         headers: {
@@ -476,11 +476,12 @@ apply DefaultFieldInputOutput @httpRequestTests([
     },
     {
         id: "RpcV2CborServerShouldFillLeftoutDefaultValues",
-        documentation: "The server should fill in the leftover default values.",
+        documentation: "The server should populate the remaining default values when it receives
+            a request that lacks values for fields with defaults defined in the model.",
         protocol: rpcv2Cbor,
         method: "POST",
         uri: "/service/RpcV2Protocol/operation/DefaultFieldInputOutput",
-        // https://cbor.nemo157.com/#type=hex&value=a6696279746556616c7565006b646f75626c6556616c7565fb40071cac083126e97166616c7365426f6f6c65616e56616c7565f56a666c6f617456616c7565fa404f5c296c696e746567657256616c756518387074727565426f6f6c65616e56616c7565f4
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=pmlieXRlVmFsdWUAa2RvdWJsZVZhbHVl%2B0AHHKwIMSbpcWZhbHNlQm9vbGVhblZhbHVl9WpmbG9hdFZhbHVl%2BkBPXClsaW50ZWdlclZhbHVlGDhwdHJ1ZUJvb2xlYW5WYWx1ZfQ%3D
         body: "pmlieXRlVmFsdWUAa2RvdWJsZVZhbHVl+0AHHKwIMSbpcWZhbHNlQm9vbGVhblZhbHVl9WpmbG9hdFZhbHVl+kBPXClsaW50ZWdlclZhbHVlGDhwdHJ1ZUJvb2xlYW5WYWx1ZfQ="
         bodyMediaType: "application/cbor",
         headers: {
@@ -506,10 +507,10 @@ apply DefaultFieldInputOutput @httpRequestTests([
 apply DefaultFieldInputOutput @httpResponseTests([
     {
         id: "RpcV2CborEmptyOutputShouldSerializeDefaultValues",
-        documentation: "Serializes an empty input with default values filled in.",
+        documentation: "Serializes an empty output with default values filled in.",
         protocol: rpcv2Cbor,
         code: 200,
-        // https://cbor.nemo157.com/#type=hex&value=a9696279746556616c7565056b646f75626c6556616c7565fb3ffe395810624dd37166616c7365426f6f6c65616e56616c7565f46a666c6f617456616c7565fa40f3f7cf6c696e746567657256616c7565190100696c6f6e6756616c75651926916a73686f727456616c75651926aa6b737472696e6756616c75656673696d706c657074727565426f6f6c65616e56616c7565f5
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=qWlieXRlVmFsdWUFa2RvdWJsZVZhbHVl%2Bz%2F%2BOVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl%2BkDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9Q%3D%3D
         body: "qWlieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9Q=="
         bodyMediaType: "application/cbor",
         headers: {
@@ -524,7 +525,7 @@ apply DefaultFieldInputOutput @httpResponseTests([
         documentation: "Left over default values should be filled in.",
         protocol: rpcv2Cbor,
         code: 200,
-        // https://cbor.nemo157.com/#type=hex&value=a9696279746556616c7565006b646f75626c6556616c7565fb40071cac083126e97166616c7365426f6f6c65616e56616c7565f56a666c6f617456616c7565fa404f5c296c696e746567657256616c75651838696c6f6e6756616c75651926916a73686f727456616c75651926aa6b737472696e6756616c75656673696d706c657074727565426f6f6c65616e56616c7565f4
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=qWlieXRlVmFsdWUAa2RvdWJsZVZhbHVl%2B0AHHKwIMSbpcWZhbHNlQm9vbGVhblZhbHVl9WpmbG9hdFZhbHVl%2BkBPXClsaW50ZWdlclZhbHVlGDhpbG9uZ1ZhbHVlGSaRanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxlcHRydWVCb29sZWFuVmFsdWX0
         body: "qWlieXRlVmFsdWUAa2RvdWJsZVZhbHVl+0AHHKwIMSbpcWZhbHNlQm9vbGVhblZhbHVl9WpmbG9hdFZhbHVl+kBPXClsaW50ZWdlclZhbHVlGDhpbG9uZ1ZhbHVlGSaRanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxlcHRydWVCb29sZWFuVmFsdWX0"
         bodyMediaType: "application/cbor",
         headers: {
