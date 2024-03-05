@@ -9,11 +9,13 @@ use aws.protocoltests.shared#StringSet
 use smithy.test#httpRequestTests
 use smithy.test#httpResponseTests
 use smithy.protocols#rpcv2Cbor
+use smithy.framework#ValidationException
 
 /// The example tests basic map serialization.
 operation RpcV2CborMaps {
     input: RpcV2CborMapsInputOutput,
-    output: RpcV2CborMapsInputOutput
+    output: RpcV2CborMapsInputOutput,
+    errors: [ValidationException]
 }
 
 apply RpcV2CborMaps @httpRequestTests([

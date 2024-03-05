@@ -16,6 +16,7 @@ use aws.protocoltests.shared#TimestampList
 use smithy.protocols#rpcv2Cbor
 use smithy.test#httpRequestTests
 use smithy.test#httpResponseTests
+use smithy.framework#ValidationException
 
 /// This test case serializes JSON lists for the following cases for both
 /// input and output:
@@ -27,7 +28,8 @@ use smithy.test#httpResponseTests
 @idempotent
 operation RpcV2CborLists {
     input: RpcV2CborListInputOutput,
-    output: RpcV2CborListInputOutput
+    output: RpcV2CborListInputOutput,
+    errors: [ValidationException]
 }
 
 apply RpcV2CborLists @httpRequestTests([
