@@ -439,7 +439,7 @@ apply DefaultFieldInputOutput @httpRequestTests([
             "Content-Type": "application/cbor"
         },
         params: {
-            byteValue: 5,
+            byteValue: 1,
             doubleValue: 1.889,
             falseBooleanValue: false,
             floatValue: 7.624,
