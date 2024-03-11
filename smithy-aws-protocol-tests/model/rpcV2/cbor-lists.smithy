@@ -251,7 +251,7 @@ apply RpcV2CborLists @httpResponseTests([
             ]
         }
     },
-        {
+    {
         id: "RpcV2CborListsEmpty",
         documentation: "Serializes empty RpcV2 Cbor lists",
         protocol: rpcv2Cbor,
