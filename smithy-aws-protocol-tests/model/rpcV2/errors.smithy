@@ -85,6 +85,7 @@ apply ComplexError @httpResponseTests([
         protocol: rpcv2Cbor,
         code: 400,
         headers: {
+            "smithy-protocol": "rpc-v2-cbor",
             "Content-Type": "application/cbor"
         },
         body: "v2ZfX3R5cGV4KGF3cy5wcm90b2NvbHRlc3RzLnJwY3YyQ2JvciNDb21wbGV4RXJyb3L/",
