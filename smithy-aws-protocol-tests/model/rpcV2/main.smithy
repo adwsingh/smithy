@@ -21,7 +21,7 @@ service RpcV2Protocol {
         RecursiveShapes,
         GreetingWithErrors,
         FractionalSeconds,
-        DefaultFieldInputOutput
+        OperationWithDefaults
     ]
 }
 
