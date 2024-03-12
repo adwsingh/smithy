@@ -127,6 +127,7 @@ operation NoInputOutput {}
         ]
         method: "POST",
         uri: "/service/RpcV2Protocol/operation/EmptyInputOutput",
+        bodyMediaType: "application/cbor",
         body: "v/8=",
     },
 ])
@@ -164,6 +165,7 @@ operation EmptyInputOutput {
         ]
         method: "POST",
         uri: "/service/RpcV2Protocol/operation/OptionalInputOutput",
+        bodyMediaType: "application/cbor",
         body: "v/8=",
     },
 ])

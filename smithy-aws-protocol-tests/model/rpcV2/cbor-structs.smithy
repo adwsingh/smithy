@@ -20,7 +20,8 @@ use smithy.test#httpResponseTests
         method: "POST",
         bodyMediaType: "application/cbor",
         uri: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
-        body: "v2lieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9f8="
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=v2lieXRlVmFsdWUFa2RvdWJsZVZhbHVl%2Bz%2F%2BOVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl%2BkDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9WlibG9iVmFsdWVDZm9v%2Fw%3D%3D
+        body: "v2lieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9WlibG9iVmFsdWVDZm9v/w=="
         params: {
             byteValue: 5,
             doubleValue: 1.889,
@@ -30,13 +31,15 @@ use smithy.test#httpResponseTests
             longValue: 9873,
             shortValue: 9898,
             stringValue: "simple",
-            trueBooleanValue: true
+            trueBooleanValue: true,
+            blobValue: "foo"
         }
     },
     {
         id: "RpcV2CborSimpleScalarPropertiesUsingIndefiniteLength",
         protocol: rpcv2Cbor,
-        documentation: "Serializes simple scalar properties using definite length map",
+        documentation: """The server should be capable of deserializing simple scalar properties
+            encoded using a map with a definite length.""",
         headers: {
             "smithy-protocol": "rpc-v2-cbor",
             "Accept": "application/cbor",
@@ -45,8 +48,8 @@ use smithy.test#httpResponseTests
         method: "POST",
         bodyMediaType: "application/cbor",
         uri: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
-        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=qWlieXRlVmFsdWUFa2RvdWJsZVZhbHVl%2Bz%2F%2BOVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl%2BkDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9Q%3D%3D
-        body: "qWlieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9Q=="
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=qmlieXRlVmFsdWUFa2RvdWJsZVZhbHVl%2Bz%2F%2BOVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl%2BkDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9WlibG9iVmFsdWVDZm9v
+        body: "qmlieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9WlibG9iVmFsdWVDZm9v"
         params: {
             byteValue: 5,
             doubleValue: 1.889,
@@ -56,8 +59,10 @@ use smithy.test#httpResponseTests
             longValue: 9873,
             shortValue: 9898,
             stringValue: "simple",
-            trueBooleanValue: true
-        }
+            trueBooleanValue: true,
+            blobValue: "foo"
+        },
+        appliesTo: "server"
     },
     {
         id: "RpcV2CborClientDoesntSerializeNullStructureValues",
@@ -148,9 +153,9 @@ use smithy.test#httpResponseTests
         }
     },
     {
-        id: "RpcV2CborSupportsIndefiniteLengthStrings",
+        id: "RpcV2CborIndefiniteLengthStringsCanBeDeserialized",
         protocol: rpcv2Cbor,
-        documentation: "Supports indefinite length text strings.",
+        documentation: "The server should be capable of deserializing indefinite length text strings.",
         headers: {
             "smithy-protocol": "rpc-v2-cbor",
             "Accept": "application/cbor",
@@ -163,12 +168,13 @@ use smithy.test#httpResponseTests
         body: "oWtzdHJpbmdWYWx1ZX94HUFuIGV4YW1wbGUgaW5kZWZpbml0ZSBzdHJpbmcscSBjaHVua2VkIG9uIGNvbW1h/w=="
         params: {
             stringValue: "An example indefinite string, chunked on comma"
-        }
+        },
+        appliesTo: "server"
     },
     {
-        id: "RpcV2CborSupportsIndefiniteLengthByteStrings",
+        id: "RpcV2CborIndefiniteLengthByteStringsCanBeDeserialized",
         protocol: rpcv2Cbor,
-        documentation: "Supports indefinite length byte strings.",
+        documentation: "The server should be capable of deserializing indefinite length byte strings.",
         headers: {
             "smithy-protocol": "rpc-v2-cbor",
             "Accept": "application/cbor",
@@ -177,11 +183,12 @@ use smithy.test#httpResponseTests
         method: "POST",
         bodyMediaType: "application/cbor",
         uri: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
-        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=oWtzdHJpbmdWYWx1ZV9YIkFuIGV4YW1wbGUgaW5kZWZpbml0ZS1ieXRlIHN0cmluZyxRIGNodW5rZWQgb24gY29tbWH%2F
-        body: "oWtzdHJpbmdWYWx1ZV9YIkFuIGV4YW1wbGUgaW5kZWZpbml0ZS1ieXRlIHN0cmluZyxRIGNodW5rZWQgb24gY29tbWH/"
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=oWlibG9iVmFsdWVfWCJBbiBleGFtcGxlIGluZGVmaW5pdGUtYnl0ZSBzdHJpbmcsUSBjaHVua2VkIG9uIGNvbW1h%2Fw%3D%3D
+        body: "oWlibG9iVmFsdWVfWCJBbiBleGFtcGxlIGluZGVmaW5pdGUtYnl0ZSBzdHJpbmcsUSBjaHVua2VkIG9uIGNvbW1h/w=="
         params: {
-            stringValue: "An example indefinite-byte string, chunked on comma"
-        }
+            blobValue: "An example indefinite-byte string, chunked on comma"
+        },
+        appliesTo: "server"
     },
     {
         id: "RpcV2CborSupportsUpcastingData",
@@ -195,11 +202,11 @@ use smithy.test#httpResponseTests
         method: "POST",
         bodyMediaType: "application/cbor",
         uri: "/service/RpcV2Protocol/operation/SimpleScalarProperties",
-        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=v2tkb3VibGVWYWx1Zfk%2FjmpmbG9hdFZhbHVl%2BUegbGludGVnZXJWYWx1ZRg4aWxvbmdWYWx1ZRkBAGpzaG9ydFZhbHVlCv8%3D
-        body: "v2tkb3VibGVWYWx1Zfk/jmpmbG9hdFZhbHVl+UegbGludGVnZXJWYWx1ZRg4aWxvbmdWYWx1ZRkBAGpzaG9ydFZhbHVlCv8="
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=v2tkb3VibGVWYWx1Zfk%2BAGpmbG9hdFZhbHVl%2BUegbGludGVnZXJWYWx1ZRg4aWxvbmdWYWx1ZRkBAGpzaG9ydFZhbHVlCv8%3D
+        body: "v2tkb3VibGVWYWx1Zfk+AGpmbG9hdFZhbHVl+UegbGludGVnZXJWYWx1ZRg4aWxvbmdWYWx1ZRkBAGpzaG9ydFZhbHVlCv8="
         params: {
-            doubleValue: 1.889,
-            floatValue: 7.624,
+            doubleValue: 1.5,
+            floatValue: 7.625,
             integerValue: 56,
             longValue: 256,
             shortValue: 10
@@ -216,8 +223,8 @@ use smithy.test#httpResponseTests
             "Content-Type": "application/cbor"
         }
         bodyMediaType: "application/cbor",
-        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=v3B0cnVlQm9vbGVhblZhbHVl9XFmYWxzZUJvb2xlYW5WYWx1ZfRpYnl0ZVZhbHVlBWtkb3VibGVWYWx1Zfs%2F%2FjlYEGJN02pmbG9hdFZhbHVl%2BkDz989saW50ZWdlclZhbHVlGQEAanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxl%2Fw%3D%3D
-        body: "v3B0cnVlQm9vbGVhblZhbHVl9XFmYWxzZUJvb2xlYW5WYWx1ZfRpYnl0ZVZhbHVlBWtkb3VibGVWYWx1Zfs//jlYEGJN02pmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxl/w=="
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=v3B0cnVlQm9vbGVhblZhbHVl9XFmYWxzZUJvb2xlYW5WYWx1ZfRpYnl0ZVZhbHVlBWtkb3VibGVWYWx1Zfs%2F%2FjlYEGJN02pmbG9hdFZhbHVl%2BkDz989saW50ZWdlclZhbHVlGQEAanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxlaWJsb2JWYWx1ZUNmb2%2F%2F
+        body: "v3B0cnVlQm9vbGVhblZhbHVl9XFmYWxzZUJvb2xlYW5WYWx1ZfRpYnl0ZVZhbHVlBWtkb3VibGVWYWx1Zfs//jlYEGJN02pmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxlaWJsb2JWYWx1ZUNmb2//"
         code: 200,
         params: {
             trueBooleanValue: true,
@@ -227,7 +234,8 @@ use smithy.test#httpResponseTests
             floatValue: 7.624,
             integerValue: 256,
             shortValue: 9898,
-            stringValue: "simple"
+            stringValue: "simple",
+            blobValue: "foo"
         }
     },
     {
@@ -404,6 +412,7 @@ structure SimpleScalarStructure {
     longValue: Long,
     shortValue: Short,
     stringValue: String,
+    blobValue: Blob
 }
 
 
@@ -414,7 +423,8 @@ apply DefaultFieldInputOutput @httpRequestTests([
         protocol: rpcv2Cbor,
         method: "POST",
         uri: "/service/RpcV2Protocol/operation/DefaultFieldInputOutput",
-        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=qWlieXRlVmFsdWUFa2RvdWJsZVZhbHVl%2Bz%2F%2BOVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl%2BkDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9Q%3D%3D        body: "qWlieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9Q=="
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=qWlieXRlVmFsdWUFa2RvdWJsZVZhbHVl%2Bz%2F%2BOVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl%2BkDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9Q%3D%3D
+        body: "qWlieXRlVmFsdWUFa2RvdWJsZVZhbHVl+z/+OVgQYk3TcWZhbHNlQm9vbGVhblZhbHVl9GpmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZXB0cnVlQm9vbGVhblZhbHVl9Q=="
         bodyMediaType: "application/cbor",
         headers: {
             "smithy-protocol": "rpc-v2-cbor",
@@ -507,7 +517,7 @@ apply DefaultFieldInputOutput @httpRequestTests([
 apply DefaultFieldInputOutput @httpResponseTests([
     {
         id: "RpcV2CborEmptyOutputShouldSerializeDefaultValues",
-        documentation: "Serializes an empty output with default values filled in.",
+        documentation: "An empty response that has default values should have its fields set to those defaults.",
         protocol: rpcv2Cbor,
         code: 200,
         // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=v3B0cnVlQm9vbGVhblZhbHVl9XFmYWxzZUJvb2xlYW5WYWx1ZfRpYnl0ZVZhbHVlAWtkb3VibGVWYWx1Zfs%2F%2FjlYEGJN02pmbG9hdFZhbHVl%2BkDz989saW50ZWdlclZhbHVlGQEAaWxvbmdWYWx1ZRkmkWpzaG9ydFZhbHVlGSaqa3N0cmluZ1ZhbHVlZnNpbXBsZf8%3D
