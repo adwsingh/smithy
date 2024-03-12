@@ -38,7 +38,8 @@ use smithy.test#httpResponseTests
     {
         id: "RpcV2CborSimpleScalarPropertiesUsingIndefiniteLength",
         protocol: rpcv2Cbor,
-        documentation: """The server should be capable of deserializing simple scalar properties
+        documentation: """
+            The server should be capable of deserializing simple scalar properties
             encoded using a map with a definite length.""",
         headers: {
             "smithy-protocol": "rpc-v2-cbor",
