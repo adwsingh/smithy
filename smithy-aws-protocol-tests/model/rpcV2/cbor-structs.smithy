@@ -6,7 +6,6 @@ use smithy.protocols#rpcv2Cbor
 use smithy.test#httpRequestTests
 use smithy.test#httpResponseTests
 
-
 @httpRequestTests([
     {
         id: "RpcV2CborSimpleScalarProperties",
@@ -211,7 +210,8 @@ use smithy.test#httpResponseTests
             integerValue: 56,
             longValue: 256,
             shortValue: 10
-        }
+        },
+        appliesTo: "server"
     },
 ])
 @httpResponseTests([

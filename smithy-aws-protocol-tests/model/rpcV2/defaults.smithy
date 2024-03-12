@@ -5,6 +5,7 @@ namespace aws.protocoltests.rpcv2Cbor
 use smithy.protocols#rpcv2Cbor
 use smithy.test#httpRequestTests
 use smithy.test#httpResponseTests
+use smithy.framework#ValidationException
 
 apply OperationWithDefaults @httpRequestTests([
     {
@@ -21,8 +22,8 @@ apply OperationWithDefaults @httpRequestTests([
             "Content-Type": "application/cbor"
         },
         bodyMediaType: "application/cbor"
-        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=v2hkZWZhdWx0c7JtZGVmYXVsdFN0cmluZ2JoaW5kZWZhdWx0Qm9vbGVhbvVrZGVmYXVsdExpc3SAcmRlZmF1bHREb2N1bWVudE1hcKB1ZGVmYXVsdERvY3VtZW50U3RyaW5nYmhpdmRlZmF1bHREb2N1bWVudEJvb2xlYW71c2RlZmF1bHREb2N1bWVudExpc3SAcGRlZmF1bHRUaW1lc3RhbXAAa2RlZmF1bHRCbG9iZFlXSmprZGVmYXVsdEJ5dGUBbGRlZmF1bHRTaG9ydAFuZGVmYXVsdEludGVnZXIKa2RlZmF1bHRMb25nGGRsZGVmYXVsdEZsb2F0%2Bz%2FwAAAAAAAAbWRlZmF1bHREb3VibGX7P%2FAAAAAAAABqZGVmYXVsdE1hcKBrZGVmYXVsdEVudW1jRk9PbmRlZmF1bHRJbnRFbnVtAf8%3D
-        body: "v2hkZWZhdWx0c7JtZGVmYXVsdFN0cmluZ2JoaW5kZWZhdWx0Qm9vbGVhbvVrZGVmYXVsdExpc3SAcmRlZmF1bHREb2N1bWVudE1hcKB1ZGVmYXVsdERvY3VtZW50U3RyaW5nYmhpdmRlZmF1bHREb2N1bWVudEJvb2xlYW71c2RlZmF1bHREb2N1bWVudExpc3SAcGRlZmF1bHRUaW1lc3RhbXAAa2RlZmF1bHRCbG9iZFlXSmprZGVmYXVsdEJ5dGUBbGRlZmF1bHRTaG9ydAFuZGVmYXVsdEludGVnZXIKa2RlZmF1bHRMb25nGGRsZGVmYXVsdEZsb2F0+z/wAAAAAAAAbWRlZmF1bHREb3VibGX7P/AAAAAAAABqZGVmYXVsdE1hcKBrZGVmYXVsdEVudW1jRk9PbmRlZmF1bHRJbnRFbnVtAf8="
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=v21kZWZhdWx0U3RyaW5nYmhpbmRlZmF1bHRCb29sZWFu9WtkZWZhdWx0TGlzdIBwZGVmYXVsdFRpbWVzdGFtcABrZGVmYXVsdEJsb2JjYWJja2RlZmF1bHRCeXRlAWxkZWZhdWx0U2hvcnQBbmRlZmF1bHRJbnRlZ2VyCmtkZWZhdWx0TG9uZxhkbGRlZmF1bHRGbG9hdPs%2F8AAAAAAAAG1kZWZhdWx0RG91Ymxl%2Bz%2FwAAAAAAAAamRlZmF1bHRNYXCga2RlZmF1bHRFbnVtY0ZPT25kZWZhdWx0SW50RW51bQH%2F
+        body: "v21kZWZhdWx0U3RyaW5nYmhpbmRlZmF1bHRCb29sZWFu9WtkZWZhdWx0TGlzdIBwZGVmYXVsdFRpbWVzdGFtcABrZGVmYXVsdEJsb2JjYWJja2RlZmF1bHRCeXRlAWxkZWZhdWx0U2hvcnQBbmRlZmF1bHRJbnRlZ2VyCmtkZWZhdWx0TG9uZxhkbGRlZmF1bHRGbG9hdPs/8AAAAAAAAG1kZWZhdWx0RG91Ymxl+z/wAAAAAAAAamRlZmF1bHRNYXCga2RlZmF1bHRFbnVtY0ZPT25kZWZhdWx0SW50RW51bQH/"
         params: {
             defaults: {}
         }
@@ -60,18 +61,13 @@ apply OperationWithDefaults @httpRequestTests([
             "Accept": "application/cbor",
             "Content-Type": "application/cbor"
         },
-        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=v2hkZWZhdWx0c7NtZGVmYXVsdFN0cmluZ2NieWVuZGVmYXVsdEJvb2xlYW71a2RlZmF1bHRMaXN0gWFhcmRlZmF1bHREb2N1bWVudE1hcKFkbmFtZWRKYWNrdWRlZmF1bHREb2N1bWVudFN0cmluZ2NieWV2ZGVmYXVsdERvY3VtZW50Qm9vbGVhbvVzZGVmYXVsdERvY3VtZW50TGlzdIFhYnNkZWZhdWx0TnVsbERvY3VtZW50Z25vdE51bGxwZGVmYXVsdFRpbWVzdGFtcAFrZGVmYXVsdEJsb2JiaGlrZGVmYXVsdEJ5dGUCbGRlZmF1bHRTaG9ydAJuZGVmYXVsdEludGVnZXIUa2RlZmF1bHRMb25nGMhsZGVmYXVsdEZsb2F0%2B0AAAAAAAAAAbWRlZmF1bHREb3VibGX7QAAAAAAAAABqZGVmYXVsdE1hcKFkbmFtZWRKYWNra2RlZmF1bHRFbnVtY0JBUm5kZWZhdWx0SW50RW51bQL%2F
-        body: "v2hkZWZhdWx0c7NtZGVmYXVsdFN0cmluZ2NieWVuZGVmYXVsdEJvb2xlYW71a2RlZmF1bHRMaXN0gWFhcmRlZmF1bHREb2N1bWVudE1hcKFkbmFtZWRKYWNrdWRlZmF1bHREb2N1bWVudFN0cmluZ2NieWV2ZGVmYXVsdERvY3VtZW50Qm9vbGVhbvVzZGVmYXVsdERvY3VtZW50TGlzdIFhYnNkZWZhdWx0TnVsbERvY3VtZW50Z25vdE51bGxwZGVmYXVsdFRpbWVzdGFtcAFrZGVmYXVsdEJsb2JiaGlrZGVmYXVsdEJ5dGUCbGRlZmF1bHRTaG9ydAJuZGVmYXVsdEludGVnZXIUa2RlZmF1bHRMb25nGMhsZGVmYXVsdEZsb2F0+0AAAAAAAAAAbWRlZmF1bHREb3VibGX7QAAAAAAAAABqZGVmYXVsdE1hcKFkbmFtZWRKYWNra2RlZmF1bHRFbnVtY0JBUm5kZWZhdWx0SW50RW51bQL/"
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=v2hkZWZhdWx0c65tZGVmYXVsdFN0cmluZ2NieWVuZGVmYXVsdEJvb2xlYW71a2RlZmF1bHRMaXN0gWFhcGRlZmF1bHRUaW1lc3RhbXABa2RlZmF1bHRCbG9iYmhpa2RlZmF1bHRCeXRlAmxkZWZhdWx0U2hvcnQCbmRlZmF1bHRJbnRlZ2VyFGtkZWZhdWx0TG9uZxjIbGRlZmF1bHRGbG9hdPtAAAAAAAAAAG1kZWZhdWx0RG91Ymxl%2B0AAAAAAAAAAamRlZmF1bHRNYXChZG5hbWVkSmFja2tkZWZhdWx0RW51bWNCQVJuZGVmYXVsdEludEVudW0C%2Fw%3D%3D
+        body: "v2hkZWZhdWx0c65tZGVmYXVsdFN0cmluZ2NieWVuZGVmYXVsdEJvb2xlYW71a2RlZmF1bHRMaXN0gWFhcGRlZmF1bHRUaW1lc3RhbXABa2RlZmF1bHRCbG9iYmhpa2RlZmF1bHRCeXRlAmxkZWZhdWx0U2hvcnQCbmRlZmF1bHRJbnRlZ2VyFGtkZWZhdWx0TG9uZxjIbGRlZmF1bHRGbG9hdPtAAAAAAAAAAG1kZWZhdWx0RG91Ymxl+0AAAAAAAAAAamRlZmF1bHRNYXChZG5hbWVkSmFja2tkZWZhdWx0RW51bWNCQVJuZGVmYXVsdEludEVudW0C/w=="
         params: {
             defaults: {
                 defaultString: "bye",
                 defaultBoolean: true,
                 defaultList: ["a"],
-                defaultDocumentMap: {name: "Jack"},
-                defaultDocumentString: "bye",
-                defaultDocumentBoolean: true,
-                defaultDocumentList: ["b"],
-                defaultNullDocument: "notNull",
                 defaultTimestamp: 1,
                 defaultBlob: "hi",
                 defaultByte: 2,
@@ -107,10 +103,6 @@ apply OperationWithDefaults @httpRequestTests([
                 defaultString: "hi"
                 defaultBoolean: true
                 defaultList: []
-                defaultDocumentMap: {}
-                defaultDocumentString: "hi"
-                defaultDocumentBoolean: true
-                defaultDocumentList: []
                 defaultTimestamp: 0
                 defaultBlob: "abc"
                 defaultByte: 1
@@ -147,10 +139,6 @@ apply OperationWithDefaults @httpResponseTests([
             defaultString: "hi"
             defaultBoolean: true
             defaultList: []
-            defaultDocumentMap: {}
-            defaultDocumentString: "hi"
-            defaultDocumentBoolean: true
-            defaultDocumentList: []
             defaultTimestamp: 0
             defaultBlob: "abc"
             defaultByte: 1
@@ -176,17 +164,12 @@ apply OperationWithDefaults @httpResponseTests([
             "smithy-protocol": "rpc-v2-cbor",
             "Content-Type": "application/cbor"
         },
-        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=v21kZWZhdWx0U3RyaW5nY2J5ZW5kZWZhdWx0Qm9vbGVhbvRrZGVmYXVsdExpc3SBYWFyZGVmYXVsdERvY3VtZW50TWFwoWRuYW1lZEphY2t1ZGVmYXVsdERvY3VtZW50U3RyaW5nY2J5ZXZkZWZhdWx0RG9jdW1lbnRCb29sZWFu9HNkZWZhdWx0RG9jdW1lbnRMaXN0gWFic2RlZmF1bHROdWxsRG9jdW1lbnRnbm90TnVsbHBkZWZhdWx0VGltZXN0YW1wAmtkZWZhdWx0QmxvYmJoaWtkZWZhdWx0Qnl0ZQJsZGVmYXVsdFNob3J0Am5kZWZhdWx0SW50ZWdlchRrZGVmYXVsdExvbmcYyGxkZWZhdWx0RmxvYXT7QAAAAAAAAABtZGVmYXVsdERvdWJsZftAAAAAAAAAAGpkZWZhdWx0TWFwoWRuYW1lZEphY2trZGVmYXVsdEVudW1jQkFSbmRlZmF1bHRJbnRFbnVtAv8%3D
-        body: "v21kZWZhdWx0U3RyaW5nY2J5ZW5kZWZhdWx0Qm9vbGVhbvRrZGVmYXVsdExpc3SBYWFyZGVmYXVsdERvY3VtZW50TWFwoWRuYW1lZEphY2t1ZGVmYXVsdERvY3VtZW50U3RyaW5nY2J5ZXZkZWZhdWx0RG9jdW1lbnRCb29sZWFu9HNkZWZhdWx0RG9jdW1lbnRMaXN0gWFic2RlZmF1bHROdWxsRG9jdW1lbnRnbm90TnVsbHBkZWZhdWx0VGltZXN0YW1wAmtkZWZhdWx0QmxvYmJoaWtkZWZhdWx0Qnl0ZQJsZGVmYXVsdFNob3J0Am5kZWZhdWx0SW50ZWdlchRrZGVmYXVsdExvbmcYyGxkZWZhdWx0RmxvYXT7QAAAAAAAAABtZGVmYXVsdERvdWJsZftAAAAAAAAAAGpkZWZhdWx0TWFwoWRuYW1lZEphY2trZGVmYXVsdEVudW1jQkFSbmRlZmF1bHRJbnRFbnVtAv8="
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=v21kZWZhdWx0U3RyaW5nY2J5ZW5kZWZhdWx0Qm9vbGVhbvRrZGVmYXVsdExpc3SBYWFwZGVmYXVsdFRpbWVzdGFtcAJrZGVmYXVsdEJsb2JiaGlrZGVmYXVsdEJ5dGUCbGRlZmF1bHRTaG9ydAJuZGVmYXVsdEludGVnZXIUa2RlZmF1bHRMb25nGMhsZGVmYXVsdEZsb2F0%2B0AAAAAAAAAAbWRlZmF1bHREb3VibGX7QAAAAAAAAABqZGVmYXVsdE1hcKFkbmFtZWRKYWNra2RlZmF1bHRFbnVtY0JBUm5kZWZhdWx0SW50RW51bQL%2F
+        body: "v21kZWZhdWx0U3RyaW5nY2J5ZW5kZWZhdWx0Qm9vbGVhbvRrZGVmYXVsdExpc3SBYWFwZGVmYXVsdFRpbWVzdGFtcAJrZGVmYXVsdEJsb2JiaGlrZGVmYXVsdEJ5dGUCbGRlZmF1bHRTaG9ydAJuZGVmYXVsdEludGVnZXIUa2RlZmF1bHRMb25nGMhsZGVmYXVsdEZsb2F0+0AAAAAAAAAAbWRlZmF1bHREb3VibGX7QAAAAAAAAABqZGVmYXVsdE1hcKFkbmFtZWRKYWNra2RlZmF1bHRFbnVtY0JBUm5kZWZhdWx0SW50RW51bQL/"
         params: {
             defaultString: "bye",
             defaultBoolean: false,
             defaultList: ["a"],
-            defaultDocumentMap: {name: "Jack"},
-            defaultDocumentString: "bye",
-            defaultDocumentBoolean: false,
-            defaultDocumentList: ["b"],
-            defaultNullDocument: "notNull",
             defaultTimestamp: 2,
             defaultBlob: "hi",
             defaultByte: 2,
@@ -212,8 +195,8 @@ apply OperationWithDefaults @httpResponseTests([
             "smithy-protocol": "rpc-v2-cbor",
             "Content-Type": "application/cbor"
         },
-        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=v21kZWZhdWx0U3RyaW5nYmhpbmRlZmF1bHRCb29sZWFu9WtkZWZhdWx0TGlzdIByZGVmYXVsdERvY3VtZW50TWFwoHVkZWZhdWx0RG9jdW1lbnRTdHJpbmdiaGl2ZGVmYXVsdERvY3VtZW50Qm9vbGVhbvVzZGVmYXVsdERvY3VtZW50TGlzdIBwZGVmYXVsdFRpbWVzdGFtcABrZGVmYXVsdEJsb2JkWVdKamtkZWZhdWx0Qnl0ZQFsZGVmYXVsdFNob3J0AW5kZWZhdWx0SW50ZWdlcgprZGVmYXVsdExvbmcYZGxkZWZhdWx0RmxvYXT7P%2FAAAAAAAABtZGVmYXVsdERvdWJsZfs%2F8AAAAAAAAGpkZWZhdWx0TWFwoGtkZWZhdWx0RW51bWNGT09uZGVmYXVsdEludEVudW0B%2Fw%3D%3D
-        body: "v21kZWZhdWx0U3RyaW5nYmhpbmRlZmF1bHRCb29sZWFu9WtkZWZhdWx0TGlzdIByZGVmYXVsdERvY3VtZW50TWFwoHVkZWZhdWx0RG9jdW1lbnRTdHJpbmdiaGl2ZGVmYXVsdERvY3VtZW50Qm9vbGVhbvVzZGVmYXVsdERvY3VtZW50TGlzdIBwZGVmYXVsdFRpbWVzdGFtcABrZGVmYXVsdEJsb2JkWVdKamtkZWZhdWx0Qnl0ZQFsZGVmYXVsdFNob3J0AW5kZWZhdWx0SW50ZWdlcgprZGVmYXVsdExvbmcYZGxkZWZhdWx0RmxvYXT7P/AAAAAAAABtZGVmYXVsdERvdWJsZfs/8AAAAAAAAGpkZWZhdWx0TWFwoGtkZWZhdWx0RW51bWNGT09uZGVmYXVsdEludEVudW0B/w=="
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=v21kZWZhdWx0U3RyaW5nYmhpbmRlZmF1bHRCb29sZWFu9WtkZWZhdWx0TGlzdIBwZGVmYXVsdFRpbWVzdGFtcABrZGVmYXVsdEJsb2JjYWJja2RlZmF1bHRCeXRlAWxkZWZhdWx0U2hvcnQBbmRlZmF1bHRJbnRlZ2VyCmtkZWZhdWx0TG9uZxhkbGRlZmF1bHRGbG9hdPs%2F8AAAAAAAAG1kZWZhdWx0RG91Ymxl%2Bz%2FwAAAAAAAAamRlZmF1bHRNYXCga2RlZmF1bHRFbnVtY0ZPT25kZWZhdWx0SW50RW51bQH%2F
+        body: "v21kZWZhdWx0U3RyaW5nYmhpbmRlZmF1bHRCb29sZWFu9WtkZWZhdWx0TGlzdIBwZGVmYXVsdFRpbWVzdGFtcABrZGVmYXVsdEJsb2JjYWJja2RlZmF1bHRCeXRlAWxkZWZhdWx0U2hvcnQBbmRlZmF1bHRJbnRlZ2VyCmtkZWZhdWx0TG9uZxhkbGRlZmF1bHRGbG9hdPs/8AAAAAAAAG1kZWZhdWx0RG91Ymxl+z/wAAAAAAAAamRlZmF1bHRNYXCga2RlZmF1bHRFbnVtY0ZPT25kZWZhdWx0SW50RW51bQH/"
         params: {}
     }
 ])
@@ -226,6 +209,8 @@ operation OperationWithDefaults {
     }
 
     output := with [DefaultsMixin] {}
+
+    errors: [ValidationException]
 }
 
 structure Defaults with [DefaultsMixin] {}
