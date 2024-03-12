@@ -240,6 +240,31 @@ use smithy.test#httpResponseTests
         }
     },
     {
+        id: "RpcV2CborSimpleScalarPropertiesUsingDefiniteLength",
+        protocol: rpcv2Cbor,
+        documentation: "Deserialize simple scalar properties encoded using a map with definite length",
+        headers: {
+            "smithy-protocol": "rpc-v2-cbor",
+            "Content-Type": "application/cbor"
+        }
+        bodyMediaType: "application/cbor",
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=qXB0cnVlQm9vbGVhblZhbHVl9XFmYWxzZUJvb2xlYW5WYWx1ZfRpYnl0ZVZhbHVlBWtkb3VibGVWYWx1Zfs%2F%2FjlYEGJN02pmbG9hdFZhbHVl%2BkDz989saW50ZWdlclZhbHVlGQEAanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxlaWJsb2JWYWx1ZUNmb28%3D
+        body: "qXB0cnVlQm9vbGVhblZhbHVl9XFmYWxzZUJvb2xlYW5WYWx1ZfRpYnl0ZVZhbHVlBWtkb3VibGVWYWx1Zfs//jlYEGJN02pmbG9hdFZhbHVl+kDz989saW50ZWdlclZhbHVlGQEAanNob3J0VmFsdWUZJqprc3RyaW5nVmFsdWVmc2ltcGxlaWJsb2JWYWx1ZUNmb28="
+        code: 200,
+        params: {
+            trueBooleanValue: true,
+            falseBooleanValue: false,
+            byteValue: 5,
+            doubleValue: 1.889,
+            floatValue: 7.624,
+            integerValue: 256,
+            shortValue: 9898,
+            stringValue: "simple",
+            blobValue: "foo"
+        },
+        appliesTo: "client"
+    },
+    {
         id: "RpcV2CborClientDoesntDeSerializeNullStructureValues",
         documentation: "RpcV2 Cbor should deserialize null structure values",
         protocol: rpcv2Cbor,
@@ -380,6 +405,34 @@ apply RecursiveShapes @httpResponseTests([
                 }
             }
         }
+    },
+    {
+        id: "RpcV2CborRecursiveShapesUsingDefiniteLength",
+        documentation: "Deserializes recursive structures encoded using a map with definite length",
+        protocol: rpcv2Cbor,
+        code: 200,
+        // http://ec2-54-84-9-83.compute-1.amazonaws.com/hex?value=oWZuZXN0ZWSiY2Zvb2RGb28xZm5lc3RlZKJjYmFyZEJhcjFvcmVjdXJzaXZlTWVtYmVyomNmb29kRm9vMmZuZXN0ZWShY2JhcmRCYXIy
+        body: "oWZuZXN0ZWSiY2Zvb2RGb28xZm5lc3RlZKJjYmFyZEJhcjFvcmVjdXJzaXZlTWVtYmVyomNmb29kRm9vMmZuZXN0ZWShY2JhcmRCYXIy"
+        bodyMediaType: "application/cbor",
+        headers: {
+            "smithy-protocol": "rpc-v2-cbor",
+            "Content-Type": "application/cbor"
+        },
+        params: {
+            nested: {
+                foo: "Foo1",
+                nested: {
+                    bar: "Bar1",
+                    recursiveMember: {
+                        foo: "Foo2",
+                        nested: {
+                            bar: "Bar2"
+                        }
+                    }
+                }
+            }
+        },
+        appliesTo: "client"
     }
 ])
 
