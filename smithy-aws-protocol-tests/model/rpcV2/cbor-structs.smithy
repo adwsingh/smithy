@@ -242,7 +242,7 @@ use smithy.test#httpResponseTests
     {
         id: "RpcV2CborSimpleScalarPropertiesUsingDefiniteLength",
         protocol: rpcv2Cbor,
-        documentation: "Deserialize simple scalar properties encoded using a map with definite length",
+        documentation: "Deserializes simple scalar properties encoded using a map with definite length",
         headers: {
             "smithy-protocol": "rpc-v2-cbor",
             "Content-Type": "application/cbor"
