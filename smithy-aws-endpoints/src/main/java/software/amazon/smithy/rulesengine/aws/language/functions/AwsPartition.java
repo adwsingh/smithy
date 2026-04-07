@@ -171,14 +171,13 @@ public final class AwsPartition extends LibraryFunction {
         @Override
         public Value evaluate(List<Value> arguments) {
             String regionName = arguments.get(0).expectStringValue().getValue();
-            Partition matchedPartition;
             boolean inferred = false;
 
-            // Known region
-            matchedPartition = REGION_MAP.get(regionName);
-
+            // Check known regions first
+            Partition matchedPartition = REGION_MAP.get(regionName);
             if (matchedPartition == null) {
-                matchedPartition = findPartition(regionName);
+                // Fall back to regex matching (skips the redundant REGION_MAP.get inside findPartition)
+                matchedPartition = findPartitionByRegex(regionName);
                 if (matchedPartition != null) {
                     inferred = true;
                 }
@@ -223,13 +222,18 @@ public final class AwsPartition extends LibraryFunction {
             return null;
         }
 
-        // Known region
+        // Known region (exact match)
         Partition matchedPartition = REGION_MAP.get(regionName);
         if (matchedPartition != null) {
             return matchedPartition;
         }
 
-        // Try matching on region name pattern
+        // Try matching on region name pattern (regex)
+        return findPartitionByRegex(regionName);
+    }
+
+    // Separate method for the regex fallback to keep the fast path small for JIT inlining
+    private static Partition findPartitionByRegex(String regionName) {
         for (Partition partition : PARTITIONS) {
             if (partition.getCompiledRegionRegex().matcher(regionName).matches()) {
                 return partition;
