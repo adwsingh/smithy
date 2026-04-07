@@ -135,6 +135,27 @@ public final class IsValidHostLabel extends LibraryFunction {
         return true;
     }
 
+    // Lookup table for valid host label characters: [A-Za-z0-9-]
+    private static final boolean[] VALID_LABEL_CHAR = new boolean[128];
+    // Lookup table for valid first character: [A-Za-z0-9]
+    private static final boolean[] VALID_FIRST_CHAR = new boolean[128];
+
+    static {
+        for (char c = '0'; c <= '9'; c++) {
+            VALID_LABEL_CHAR[c] = true;
+            VALID_FIRST_CHAR[c] = true;
+        }
+        for (char c = 'A'; c <= 'Z'; c++) {
+            VALID_LABEL_CHAR[c] = true;
+            VALID_FIRST_CHAR[c] = true;
+        }
+        for (char c = 'a'; c <= 'z'; c++) {
+            VALID_LABEL_CHAR[c] = true;
+            VALID_FIRST_CHAR[c] = true;
+        }
+        VALID_LABEL_CHAR['-'] = true;
+    }
+
     // Validates a single label in s[start..end): ^[A-Za-z0-9][A-Za-z0-9\-]{0,62}$
     private static boolean isValidSingleLabel(String s, int start, int end) {
         int length = end - start;
@@ -143,14 +164,15 @@ public final class IsValidHostLabel extends LibraryFunction {
         }
 
         // first char must be [A-Za-z0-9]
-        if (!isAlphanumeric(s.charAt(start))) {
+        char first = s.charAt(start);
+        if (first >= 128 || !VALID_FIRST_CHAR[first]) {
             return false;
         }
 
         // remaining chars must be [A-Za-z0-9-]
         for (int i = start + 1; i < end; i++) {
             char c = s.charAt(i);
-            if (!isAlphanumeric(c) && c != '-') {
+            if (c >= 128 || !VALID_LABEL_CHAR[c]) {
                 return false;
             }
         }
@@ -158,7 +180,7 @@ public final class IsValidHostLabel extends LibraryFunction {
         return true;
     }
 
-    private static boolean isAlphanumeric(char c) {
-        return (c >= '0' && c <= '9') || (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
+    static boolean isAlphanumeric(char c) {
+        return c < 128 && VALID_FIRST_CHAR[c];
     }
 }
