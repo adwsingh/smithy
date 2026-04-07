@@ -111,56 +111,54 @@ public final class IsVirtualHostableS3Bucket extends LibraryFunction {
      * @param allowDots Whether to allow dots in the host label.
      * @return true if it is compatible.
      */
+    // Lookup table for [a-z0-9]
+    private static final boolean[] ALPHANUMERIC = new boolean[128];
+    // Lookup table for [a-z0-9-]
+    private static final boolean[] BUCKET_CHAR = new boolean[128];
+
+    static {
+        for (char c = 'a'; c <= 'z'; c++) {
+            ALPHANUMERIC[c] = true;
+            BUCKET_CHAR[c] = true;
+        }
+        for (char c = '0'; c <= '9'; c++) {
+            ALPHANUMERIC[c] = true;
+            BUCKET_CHAR[c] = true;
+        }
+        BUCKET_CHAR['-'] = true;
+    }
+
     public static boolean isVirtualHostableBucket(String hostLabel, boolean allowDots) {
-        // Bucket names must be between 3 (min) and 63 (max) characters long.
         int bucketLength = hostLabel == null ? 0 : hostLabel.length();
         if (bucketLength < 3 || bucketLength > 63) {
             return false;
         }
 
-        // Bucket names must begin and end with a letter or number.
-        if (!isAlphanumeric(hostLabel.charAt(0)) || !isAlphanumeric(hostLabel.charAt(bucketLength - 1))) {
+        char first = hostLabel.charAt(0);
+        char last = hostLabel.charAt(bucketLength - 1);
+        if (first >= 128 || !ALPHANUMERIC[first] || last >= 128 || !ALPHANUMERIC[last]) {
             return false;
         }
 
-        // Bucket names can consist only of lowercase letters, numbers, periods (.), and hyphens (-).
-        if (!allowDots) {
-            for (int i = 1; i < bucketLength - 1; i++) { // already validated 0 and N - 1.
-                if (!isValidBucketSegmentChar(hostLabel.charAt(i))) {
-                    return false;
-                }
-            }
-            return true;
-        }
-
-        // Check for consecutive dots or hyphens
-        char last = hostLabel.charAt(0);
-        for (int i = 1; i < bucketLength; i++) {
+        // Single pass for all character and adjacency rules
+        char prev = first;
+        for (int i = 1; i < bucketLength - 1; i++) {
             char c = hostLabel.charAt(i);
-            // Don't allow "bucket-.foo" or "bucket.-foo"
             if (c == '.') {
-                if (last == '.' || last == '-') {
+                if (!allowDots || prev == '.' || prev == '-') {
                     return false;
                 }
             } else if (c == '-') {
-                if (last == '.') {
+                if (allowDots && prev == '.') {
                     return false;
                 }
-            } else if (!isAlphanumeric(c)) {
+            } else if (c >= 128 || !ALPHANUMERIC[c]) {
                 return false;
             }
-            last = c;
+            prev = c;
         }
 
-        // Bucket names must not be formatted as an IP address (for example, 192.168.5.4).
-        return !ParseUrl.isIpAddr(hostLabel);
-    }
-
-    private static boolean isAlphanumeric(char c) {
-        return (c >= 'a' && c <= 'z') || (c >= '0' && c <= '9');
-    }
-
-    private static boolean isValidBucketSegmentChar(char c) {
-        return isAlphanumeric(c) || c == '-';
+        // Bucket names must not be formatted as an IP address
+        return !allowDots || !ParseUrl.isIpAddr(hostLabel);
     }
 }
